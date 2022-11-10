@@ -3,7 +3,7 @@ BIN		:= main
 INCLUDES 	+= 
 LIBS		:=
 
-CXXFLAGS	:= -O3 -m64 -fno-inline #-pg
+CXXFLAGS	:= -pg #-O3 -m64 -fno-inline
 LDFLAGS		:= -lgsl -lgslcblas #-lgomp
 
 CXX		:= clang++ #dpcpp

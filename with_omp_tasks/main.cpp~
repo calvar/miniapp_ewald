@@ -21,32 +21,32 @@ int main() {
   }
   double L = l[0];
   double alpha = 0.28;
-  double kmax = 15; //has to be >= 1
+  double kmax = 15; //has to be <= 1
   
   std::cout << "L: " << L << "\n";
   std::cout << "P0: q= " << part.get_charge(0)
-	    << " pos= " << part.get_pos(0, 0, 0) << ","
-	    << part.get_pos(0, 0, 1) << ","
-	    << part.get_pos(0, 0, 2) << "\n";
-  std::cout << "P39: q= " << part.get_charge(0)
-	    << " pos= " << part.get_pos(0, 39, 0) << ","
-	    << part.get_pos(0, 39, 1) << ","
-	    << part.get_pos(0, 39, 2) << "\n";
-  std::cout << "P40: q= " << part.get_charge(1)
-	    << " pos= " << part.get_pos(1, 0, 0) << ","
-	    << part.get_pos(1, 0, 1) << ","
-	    << part.get_pos(1, 0, 2) << "\n";
-  std::cout << "P4839: q= " << part.get_charge(1)
-	    << " pos= " << part.get_pos(1, 4799, 0) << ","
-	    << part.get_pos(1, 4799, 1) << ","
-	    << part.get_pos(1, 4799, 2) << "\n";
+	    << " pos= " << part.get_pos(0, 0) << ","
+	    << part.get_pos(0, 1) << ","
+	    << part.get_pos(0, 2) << "\n";
+  std::cout << "P39: q= " << part.get_charge(39)
+	    << " pos= " << part.get_pos(39, 0) << ","
+	    << part.get_pos(39, 1) << ","
+	    << part.get_pos(39, 2) << "\n";
+  std::cout << "P40: q= " << part.get_charge(40)
+	    << " pos= " << part.get_pos(40, 0) << ","
+	    << part.get_pos(40, 1) << ","
+	    << part.get_pos(40, 2) << "\n";
+  std::cout << "P4839: q= " << part.get_charge(4839)
+	    << " pos= " << part.get_pos(4839, 0) << ","
+	    << part.get_pos(4839, 1) << ","
+	    << part.get_pos(4839, 2) << "\n";
 
 
   unsigned ksize = pow((kmax+1),3);
   Kvector Kvec(ksize);
   k_vector(Kvec, L, alpha, kmax);
   
-  
+ 
   auto start = std::chrono::high_resolution_clock::now();
   double Ur = real_potential(part, L, alpha);
   auto stop = std::chrono::high_resolution_clock::now();

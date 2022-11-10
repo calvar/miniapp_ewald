@@ -1,11 +1,13 @@
 #include "functions.hpp"
 #include <complex>
 #include <iostream>
+#include <cstdio>
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
   std::string line;
   int NC = part.get_Nkinds();
+  int Ntot = part.get_Ntot();
   char name[30];
   sprintf(name, "conf.dat");
   std::ifstream Con(name);
@@ -13,27 +15,23 @@ bool chrg_conf(Particles& part, double L[3]){
     Con.close();
     return false;
   }
-
+  
   for(int n = 0; n < NC; ++n){ //charges
     double q;
     Con >> q;
-    part.set_charge(n, q);
   }
   Con >> L[0] >> L[1] >> L[2];
       
-  for(int n = 0; n < NC; ++n){
-    int NN = part.get_N(n);
-    for(int i = 0; i < NN; i++){
-      for(int a = 0; a < 3; ++a){
-	double p;
-	Con >> p;
-	part.set_pos(n, i, a, p); 
-      }
-      for(int a = 0; a < 3; ++a){
-	double m;
-	Con >> m;
-	part.set_mom(n, i, a, m);
-      }
+  for(int i = 0; i < Ntot; ++i){
+    for(int a = 0; a < 3; ++a){
+      double p;
+      Con >> p;
+      part.set_pos(i, a, p); 
+    }
+    for(int a = 0; a < 3; ++a){
+      double m;
+      Con >> m;
+      part.set_mom(i, a, m);
     }
   }
   Con.close();
@@ -47,14 +45,11 @@ bool chrg_conf(Particles& part, double L[3]){
 double real_coulomb(const Particles &part, double L, int i, int j,
 		    double alpha) {
   double U = 0;
-  int m, mi, n, nj;
-  part.get_kind(i, m, mi);
-  part.get_kind(j, n, nj);
     
   double ri[3], rj[3];
   for(int a = 0; a < 3; ++a){
-    ri[a] = part.get_pos(m, mi, a);
-    rj[a] = part.get_pos(n, nj, a);
+    ri[a] = part.get_pos(i, a);
+    rj[a] = part.get_pos(j, a);
   }
   double rij[3];
   for(int a = 0; a < 3; ++a){
@@ -63,8 +58,8 @@ double real_coulomb(const Particles &part, double L, int i, int j,
   }
   double RIJSQ = rij[0]*rij[0] + rij[1]*rij[1] + rij[2]*rij[2];
   
-  double qi = part.get_charge(m); 
-  double qj = part.get_charge(n);
+  double qi = part.get_charge(i); 
+  double qj = part.get_charge(j);
   double r = sqrt(RIJSQ);
   
   U = qi*qj * erfc(alpha*r) / r;
@@ -74,23 +69,34 @@ double real_coulomb(const Particles &part, double L, int i, int j,
 
 double real_potential(const Particles &part, double L, double alpha) {
   double Ur = 0;
+  int N = part.get_Ntot();
 
-  int N = 0;
-  for(int i = 0; i < part.get_Nkinds(); ++i)
-    N += part.get_N(i);
-  
-  for(int i = 0; i < N; i++){
-    int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
-    if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
-      mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
-
-    int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
-    int cnt = 0;
-    while(cnt < mx){
-      Ur += real_coulomb(part, L, i, j, alpha);
+  #pragma omp parallel
+  #pragma omp single
+  { 
+    for(int i = 0; i < N; i++){
       
-      j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
-      cnt++;
+      #pragma omp task firstprivate(i) shared(Ur)
+      {
+	double partUr = 0;
+	
+	int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
+	if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
+	  mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
+	
+	int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
+	int cnt = 0;
+	while(cnt < mx){
+	  partUr += real_coulomb(part, L, i, j, alpha);
+	  
+	  j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
+	  cnt++;
+	}
+	
+	#pragma omp atomic
+	Ur += partUr;
+      }
+      
     }
   }
   return Ur;
@@ -130,14 +136,11 @@ double recip_coulomb(const Particles &part, int N, double kk2,
 
   //Summation over particles
   for(int i = 0; i < N; i++){
-    int n, ni;
-    part.get_kind(i, n, ni);
-
     double ri[3];
     for(int a = 0; a < 3; ++a)
-      ri[a] = part.get_pos(n, ni, a);
-    double qi = part.get_charge(n);
-
+      ri[a] = part.get_pos(i, a);
+    double qi = part.get_charge(i);
+    
     for(int b = 0; b < 4; b++){
       double rik = ri[0]*K[b][0] + ri[1]*K[b][1] + ri[2]*K[b][2]; 
       sum[b] += std::polar(qi, rik);
@@ -156,57 +159,63 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
 		       double L, double alpha, int kmax) {
   double Uk = 0;
 
-  int N = 0;
-  for(int i = 0; i < part.get_Nkinds(); ++i)
-    N += part.get_N(i);
-
+  int N = part.get_Ntot();
+  
   double V = L*L*L;
   double P2 = 2*M_PI/L;
   kmax += 1;
   int kmax2 = kmax*kmax;
-  int kmax3 = kmax2*kmax;
-
-  for(int kn = 0; kn < kmax3; ++kn){
-    double partUk = 0;
-    
-    float knf = static_cast<float>(kn);
-    int nz = static_cast<int>(floor(knf/kmax2));
-    float l = knf - kmax2 * nz;
-    int ny = static_cast<int>(floor(l/kmax));
-    int nx = static_cast<int>(l) - kmax * ny;
-    int nsq = nx*nx + ny*ny + nz*nz;
-
-    double kx = P2*nx;
-    double ky = P2*ny;
-    double kz = P2*nz;
-
-    if(nsq <= kmax2){ //if image is within a spherical shell...
-      double kk2 = 2. * Kvec.get(kn) / V;  //mult by 2 for symmetry
+  int kmax3 = kmax2*kmax;  
+  
+  #pragma omp parallel
+  #pragma omp single
+  {
+    for(int kn = 0; kn < kmax3; kn++){
       
-      double K[4][3]; //Store kvectors 
-      K[0][0] = kx; K[0][1] = ky; K[0][2] = kz;
-      K[1][0] = -kx; K[1][1] = ky; K[1][2] = kz;
-      K[2][0] = kx; K[2][1] = -ky; K[2][2] = kz;
-      K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
-
-      partUk = recip_coulomb(part, N, kk2, K);
-
-      //Correct for the symmetries used
-      if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
-	partUk /= 4;
-      else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
-	      || (nx == 0 && ny != 0 && nz != 0))
-	partUk /= 2;
+      #pragma omp task firstprivate(kn) shared(Uk)
+      {
+	double partUk = 0;
+	
+	float knf = static_cast<float>(kn);
+	int nz = static_cast<int>(floor(knf/kmax2));
+	float l = knf - kmax2 * nz;
+	int ny = static_cast<int>(floor(l/kmax));
+	int nx = static_cast<int>(l) - kmax * ny;
+	int nsq = nx*nx + ny*ny + nz*nz;
+	
+	double kx = P2*nx;
+	double ky = P2*ny;
+	double kz = P2*nz;
+	if(nsq <= kmax2){ //if image is within a spherical shell...
+	  double kk2 = 2. * Kvec.get(kn) / V;  //mult by 2 for symmetry
+	  
+	  double K[4][3]; //Store kvectors 
+	  K[0][0] = kx; K[0][1] = ky; K[0][2] = kz;
+	  K[1][0] = -kx; K[1][1] = ky; K[1][2] = kz;
+	  K[2][0] = kx; K[2][1] = -ky; K[2][2] = kz;
+	  K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
+	  
+	  partUk += recip_coulomb(part, N, kk2, K);
+	
+	  //Correct for the symmetries used
+	  if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
+	    partUk /= 4;
+	  else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
+		  || (nx == 0 && ny != 0 && nz != 0))
+	    partUk /= 2;
+	}
+	
+	#pragma omp atomic
+	Uk += partUk;
+      }
+      
     }
-    Uk += partUk;
   }
-
+  
   //Self energy of the main cell
   double self = 0;
   for(int i = 0; i < N; i++){
-    int n, ni;
-    part.get_kind(i, n, ni);
-    double qi = part.get_charge(n);
+    double qi = part.get_charge(i);
     self += qi*qi;
   }
   self *= 0.5 * alpha / sqrt(M_PI);

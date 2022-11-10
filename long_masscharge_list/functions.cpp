@@ -153,6 +153,8 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
   int kmax3 = kmax2*kmax;
 
   for(int kn = 0; kn < kmax3; ++kn){
+    double partUk = 0;
+    
     float knf = static_cast<float>(kn);
     int nz = static_cast<int>(floor(knf/kmax2));
     float l = knf - kmax2 * nz;
@@ -173,15 +175,16 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
       K[2][0] = kx; K[2][1] = -ky; K[2][2] = kz;
       K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
 
-      Uk += recip_coulomb(part, N, kk2, K);
+      partUk = recip_coulomb(part, N, kk2, K);
 
       //Correct for the symmetries used
       if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
-	Uk /= 4;
+	partUk /= 4;
       else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
 	      || (nx == 0 && ny != 0 && nz != 0))
-	Uk /= 2;
+	partUk /= 2;
     }
+    Uk += partUk;
   }
 
   //Self energy of the main cell

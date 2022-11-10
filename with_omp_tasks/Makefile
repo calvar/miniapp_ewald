@@ -4,7 +4,7 @@ INCLUDES 	+=
 LIBS		:=
 
 CXXFLAGS	:= -O3 -m64 -fno-inline #-pg
-LDFLAGS		:= -lgsl -lgslcblas #-lgomp
+LDFLAGS		:= -lgsl -lgslcblas -lgomp
 
 CXX		:= clang++ #dpcpp
 LINKER		:= clang++ #dpcpp
@@ -16,10 +16,10 @@ C_OBJS		:= $(patsubst %.cpp, %.o, $(C_SOURCES))
 
 
 $(BIN): $(C_OBJS) $(HEADERS)
-	$(LINKER) -o $@ $(C_OBJS) $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) $(LIBS)
+	$(LINKER) -o $@ $(C_OBJS) $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) $(LIBS) -fopenmp
 
 $(C_OBJS): $(C_SOURCES) $(HEADERS)
-	$(CXX) -c $(C_SOURCES) $(CXXFLAGS) $(INCLUDES) #-fopenmp
+	$(CXX) -c $(C_SOURCES) $(CXXFLAGS) $(INCLUDES) -fopenmp
 
 clean: 
 	rm $(BIN) graphic *.o core*
