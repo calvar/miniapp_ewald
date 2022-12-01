@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libewald_cpu.a CMakeFiles/ewald_cpu.dir/functions.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libewald_cpu.a

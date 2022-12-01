@@ -1,0 +1,15 @@
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/CMakeFiles/edit_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/CMakeFiles/rebuild_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/CMakeFiles/ewald.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/CMakeFiles/edit_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/CMakeFiles/rebuild_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/common/CMakeFiles/ewald_common.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/common/CMakeFiles/edit_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/common/CMakeFiles/rebuild_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/cpu/CMakeFiles/ewald_cpu.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/cpu/CMakeFiles/edit_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/cpu/CMakeFiles/rebuild_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/omp_cpu/CMakeFiles/edit_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/omp_cpu/CMakeFiles/rebuild_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/tests/CMakeFiles/edit_cache.dir
+/Users/josemonsalvediaz/tmp/miniapp_ewald/build3/tests/CMakeFiles/rebuild_cache.dir

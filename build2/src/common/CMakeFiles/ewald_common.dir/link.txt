@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libewald_common.a CMakeFiles/ewald_common.dir/classes.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libewald_common.a

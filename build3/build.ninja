@@ -1,0 +1,412 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: ewald
+# Configurations: Debug
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3 && /opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3 && /opt/homebrew/Cellar/cmake/3.24.1/bin/cmake --regenerate-during-build -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/josemonsalvediaz/tmp/miniapp_ewald/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target ewald
+
+
+#############################################
+# Order-only phony target for ewald
+
+build cmake_object_order_depends_target_ewald: phony || cmake_object_order_depends_target_ewald_common cmake_object_order_depends_target_ewald_cpu
+
+build src/CMakeFiles/ewald.dir/main.cpp.o: CXX_COMPILER__ewald_Debug /Users/josemonsalvediaz/tmp/miniapp_ewald/src/main.cpp || cmake_object_order_depends_target_ewald
+  DEP_FILE = src/CMakeFiles/ewald.dir/main.cpp.o.d
+  FLAGS = -Wall -Wextra -fsanitize=address -g -g -O0 -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/josemonsalvediaz/tmp/miniapp_ewald/include/common
+  OBJECT_DIR = src/CMakeFiles/ewald.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/ewald.dir
+  TARGET_COMPILE_PDB = src/CMakeFiles/ewald.dir/
+  TARGET_PDB = src/ewald.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target ewald
+
+
+#############################################
+# Link the executable src/ewald
+
+build src/ewald: CXX_EXECUTABLE_LINKER__ewald_Debug src/CMakeFiles/ewald.dir/main.cpp.o | src/common/libewald_common.a src/cpu/libewald_cpu.a src/common/libewald_common.a || src/common/libewald_common.a src/cpu/libewald_cpu.a
+  FLAGS = -Wall -Wextra -fsanitize=address -g -g -O0 -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk
+  LINK_LIBRARIES = src/common/libewald_common.a  src/cpu/libewald_cpu.a  src/common/libewald_common.a
+  OBJECT_DIR = src/CMakeFiles/ewald.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = src/CMakeFiles/ewald.dir/
+  TARGET_FILE = src/ewald
+  TARGET_PDB = src/ewald.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src && /opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build src/edit_cache: phony src/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src && /opt/homebrew/Cellar/cmake/3.24.1/bin/cmake --regenerate-during-build -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/rebuild_cache: phony src/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/josemonsalvediaz/tmp/miniapp_ewald/src/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target ewald_common
+
+
+#############################################
+# Order-only phony target for ewald_common
+
+build cmake_object_order_depends_target_ewald_common: phony || src/common/CMakeFiles/ewald_common.dir
+
+build src/common/CMakeFiles/ewald_common.dir/classes.cpp.o: CXX_COMPILER__ewald_common_Debug /Users/josemonsalvediaz/tmp/miniapp_ewald/src/common/classes.cpp || cmake_object_order_depends_target_ewald_common
+  DEP_FILE = src/common/CMakeFiles/ewald_common.dir/classes.cpp.o.d
+  FLAGS = -Wall -Wextra -fsanitize=address -g -g -O0 -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/josemonsalvediaz/tmp/miniapp_ewald/include/common
+  OBJECT_DIR = src/common/CMakeFiles/ewald_common.dir
+  OBJECT_FILE_DIR = src/common/CMakeFiles/ewald_common.dir
+  TARGET_COMPILE_PDB = src/common/CMakeFiles/ewald_common.dir/ewald_common.pdb
+  TARGET_PDB = src/common/libewald_common.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target ewald_common
+
+
+#############################################
+# Link the static library src/common/libewald_common.a
+
+build src/common/libewald_common.a: CXX_STATIC_LIBRARY_LINKER__ewald_common_Debug src/common/CMakeFiles/ewald_common.dir/classes.cpp.o
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk
+  LANGUAGE_COMPILE_FLAGS = -Wall -Wextra -fsanitize=address -g -g -O0 -std=c++17
+  OBJECT_DIR = src/common/CMakeFiles/ewald_common.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = src/common/CMakeFiles/ewald_common.dir/ewald_common.pdb
+  TARGET_FILE = src/common/libewald_common.a
+  TARGET_PDB = src/common/libewald_common.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/common/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/common && /opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build src/common/edit_cache: phony src/common/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/common/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/common && /opt/homebrew/Cellar/cmake/3.24.1/bin/cmake --regenerate-during-build -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/common/rebuild_cache: phony src/common/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/josemonsalvediaz/tmp/miniapp_ewald/src/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target ewald_cpu
+
+
+#############################################
+# Order-only phony target for ewald_cpu
+
+build cmake_object_order_depends_target_ewald_cpu: phony || cmake_object_order_depends_target_ewald_common
+
+build src/cpu/CMakeFiles/ewald_cpu.dir/functions.cpp.o: CXX_COMPILER__ewald_cpu_Debug /Users/josemonsalvediaz/tmp/miniapp_ewald/src/cpu/functions.cpp || cmake_object_order_depends_target_ewald_cpu
+  DEP_FILE = src/cpu/CMakeFiles/ewald_cpu.dir/functions.cpp.o.d
+  FLAGS = -Wall -Wextra -fsanitize=address -g -g -O0 -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/josemonsalvediaz/tmp/miniapp_ewald/include/common
+  OBJECT_DIR = src/cpu/CMakeFiles/ewald_cpu.dir
+  OBJECT_FILE_DIR = src/cpu/CMakeFiles/ewald_cpu.dir
+  TARGET_COMPILE_PDB = src/cpu/CMakeFiles/ewald_cpu.dir/ewald_cpu.pdb
+  TARGET_PDB = src/cpu/libewald_cpu.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target ewald_cpu
+
+
+#############################################
+# Link the static library src/cpu/libewald_cpu.a
+
+build src/cpu/libewald_cpu.a: CXX_STATIC_LIBRARY_LINKER__ewald_cpu_Debug src/cpu/CMakeFiles/ewald_cpu.dir/functions.cpp.o || src/common/libewald_common.a
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk
+  LANGUAGE_COMPILE_FLAGS = -Wall -Wextra -fsanitize=address -g -g -O0 -std=c++17
+  OBJECT_DIR = src/cpu/CMakeFiles/ewald_cpu.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = src/cpu/CMakeFiles/ewald_cpu.dir/ewald_cpu.pdb
+  TARGET_FILE = src/cpu/libewald_cpu.a
+  TARGET_PDB = src/cpu/libewald_cpu.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/cpu/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/cpu && /opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build src/cpu/edit_cache: phony src/cpu/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/cpu/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/cpu && /opt/homebrew/Cellar/cmake/3.24.1/bin/cmake --regenerate-during-build -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/cpu/rebuild_cache: phony src/cpu/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/josemonsalvediaz/tmp/miniapp_ewald/src/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/omp_cpu/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/omp_cpu && /opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build src/omp_cpu/edit_cache: phony src/omp_cpu/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/omp_cpu/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/omp_cpu && /opt/homebrew/Cellar/cmake/3.24.1/bin/cmake --regenerate-during-build -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/omp_cpu/rebuild_cache: phony src/omp_cpu/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/josemonsalvediaz/tmp/miniapp_ewald/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build tests/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/tests && /opt/homebrew/Cellar/cmake/3.24.1/bin/ccmake -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build tests/edit_cache: phony tests/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build tests/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/tests && /opt/homebrew/Cellar/cmake/3.24.1/bin/cmake --regenerate-during-build -S/Users/josemonsalvediaz/tmp/miniapp_ewald -B/Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build tests/rebuild_cache: phony tests/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Target aliases.
+
+build ewald: phony src/ewald
+
+build ewald_common: phony src/common/libewald_common.a
+
+build ewald_cpu: phony src/cpu/libewald_cpu.a
+
+build libewald_common.a: phony src/common/libewald_common.a
+
+build libewald_cpu.a: phony src/cpu/libewald_cpu.a
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/josemonsalvediaz/tmp/miniapp_ewald/build3
+
+build all: phony src/all tests/all
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src
+
+build src/all: phony src/ewald src/common/all src/cpu/all src/omp_cpu/all
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/common
+
+build src/common/all: phony src/common/libewald_common.a
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/cpu
+
+build src/cpu/all: phony src/cpu/libewald_cpu.a
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/src/omp_cpu
+
+build src/omp_cpu/all: phony
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/josemonsalvediaz/tmp/miniapp_ewald/build3/tests
+
+build tests/all: phony
+
+# =============================================================================
+# Unknown Build Time Dependencies.
+# Tell Ninja that they may appear as side effects of build rules
+# otherwise ordered by order-only dependencies.
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | /Users/josemonsalvediaz/tmp/miniapp_ewald/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/common/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/cpu/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/omp_cpu/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/tests/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCCompilerABI.c /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXCompilerABI.cpp /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCompilerIdDetection.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompileFeatures.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompilerId.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineSystem.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeFindBinUtils.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeNinjaFindMake.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeSystem.cmake.in /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeTestCCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeTestCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeTestCompilerCommon.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindGSL.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindPackageMessage.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindPkgConfig.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Internal/FeatureTesting.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Darwin-Determine-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.1/CMakeCCompiler.cmake CMakeFiles/3.24.1/CMakeCXXCompiler.cmake CMakeFiles/3.24.1/CMakeSystem.cmake
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build /Users/josemonsalvediaz/tmp/miniapp_ewald/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/common/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/cpu/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/src/omp_cpu/CMakeLists.txt /Users/josemonsalvediaz/tmp/miniapp_ewald/tests/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCCompilerABI.c /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXCompilerABI.cpp /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeCompilerIdDetection.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompileFeatures.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineCompilerId.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeDetermineSystem.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeFindBinUtils.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeNinjaFindMake.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeSystem.cmake.in /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeTestCCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeTestCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/CMakeTestCompilerCommon.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindGSL.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindPackageMessage.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/FindPkgConfig.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Internal/FeatureTesting.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Darwin-Determine-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.24.1/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.1/CMakeCCompiler.cmake CMakeFiles/3.24.1/CMakeCXXCompiler.cmake CMakeFiles/3.24.1/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all

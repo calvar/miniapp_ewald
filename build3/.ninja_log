@@ -1,0 +1,7 @@
+# ninja log v5
+1	244	1669907616070124575	src/common/CMakeFiles/ewald_common.dir/classes.cpp.o	7a7948e6a6d32d0a
+245	264	1669907616092990000	src/common/libewald_common.a	3221a599413d4093
+1	305	1669907616131162449	src/cpu/CMakeFiles/ewald_cpu.dir/functions.cpp.o	f84807dc5dc475f6
+305	323	1669907616151987000	src/cpu/libewald_cpu.a	f701a2b6249b86a0
+1	325	1669907616151089977	src/CMakeFiles/ewald.dir/main.cpp.o	fd6843d50c5a71e1
+325	359	1669907616187411627	src/ewald	6ff06a2475f72ab3
