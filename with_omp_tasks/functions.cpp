@@ -43,7 +43,7 @@ bool chrg_conf(Particles& part, double L[3]){
 
 //Coulomb potential using Ewald summation---------------------------------------
 double real_coulomb(const Particles &part, double L, int i, int j,
-		    double alpha) {
+		    double alpha, double rcut) {
   double U = 0;
     
   double ri[3], rj[3];
@@ -57,17 +57,20 @@ double real_coulomb(const Particles &part, double L, int i, int j,
     rij[a] -= L * floor(rij[a] / L + 0.5);
   }
   double RIJSQ = rij[0]*rij[0] + rij[1]*rij[1] + rij[2]*rij[2];
-  
-  double qi = part.get_charge(i); 
-  double qj = part.get_charge(j);
-  double r = sqrt(RIJSQ);
-  
-  U = qi*qj * erfc(alpha*r) / r;
+
+  if(RIJSQ < rcut*rcut){
+    double qi = part.get_charge(i); 
+    double qj = part.get_charge(j);
+    double r = sqrt(RIJSQ);
+    
+    U = qi*qj * erfc(alpha*r) / r;
+  }
   
   return U;
 }
 
-double real_potential(const Particles &part, double L, double alpha) {
+double real_potential(const Particles &part, double L, double alpha,
+		      double rcut) {
   //int count = 0;
   double Ur = 0;
   int N = part.get_Ntot();
@@ -88,7 +91,7 @@ double real_potential(const Particles &part, double L, double alpha) {
 	int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
 	int cnt = 0;
 	while(cnt < mx){
-	  partUr += real_coulomb(part, L, i, j, alpha);
+	  partUr += real_coulomb(part, L, i, j, alpha, rcut);
 	  
 	  j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
 	  cnt++;

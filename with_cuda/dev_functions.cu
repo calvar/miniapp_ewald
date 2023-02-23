@@ -47,8 +47,8 @@ __device__ void atAddComplex(cuDoubleComplex* a, cuDoubleComplex b){
 
 //REAL PART-----------------------------------------------------------------
 __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
-				    int N, double L, double alpha, double *Ur
-				    /*,int *count*/) {
+				    int N, double L, double alpha, double *Ur,
+				    double rcut/*,int *count*/) {
 
   int i = threadIdx.x + blockDim.x * blockIdx.x;
   //shared variables for accumulated values
@@ -81,10 +81,11 @@ __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
       }
       
       double RIJSQ = posij[0]*posij[0] + posij[1]*posij[1] + posij[2]*posij[2];
-      double RIJ = sqrt(RIJSQ);
-
-      U += qi*qj * erfc(alpha*RIJ) / RIJ;
-
+      if(RIJSQ < rcut*rcut){
+	double RIJ = sqrt(RIJSQ);
+	
+	U += qi*qj * erfc(alpha*RIJ) / RIJ;
+      }
       j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
       cnt++;
     }
@@ -106,7 +107,8 @@ __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
   }
 }
 
-double real_potential(const Particles &part, double L, double alpha) {
+double real_potential(const Particles &part, double L, double alpha,
+		      double rcut) {
   int N = part.get_Ntot();
 
   double *d_rad, *d_chrg, *d_pos, *d_Ur;
@@ -140,7 +142,7 @@ double real_potential(const Particles &part, double L, double alpha) {
   dim3 dimGrid(blocks, 1, 1);
   dim3 dimBlock(BLOCK_WIDTH, 1, 1);
   real_coulomb_kernel<<<dimGrid,dimBlock>>>(d_rad, d_chrg, d_pos, N, L, alpha,
-					    d_Ur/*, d_count*/);
+					    d_Ur, rcut/*, d_count*/);
 
   // //copy output to host
   // int *count;

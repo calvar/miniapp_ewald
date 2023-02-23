@@ -22,24 +22,30 @@ int main() {
   double L = l[0];
   double alpha = 0.28;
   double kmax = 15; //has to be >= 1
+  double rcut_perc = 100;
+  
+  if(rcut_perc > 100) rcut_perc = 100;
+  double rcut = rcut_perc * (L/2) / 100;
   
   std::cout << "L: " << L << "\n";
-  std::cout << "P0: q= " << part.get_charge(0)
-	    << " pos= " << part.get_pos(0, 0) << ","
-	    << part.get_pos(0, 1) << ","
-	    << part.get_pos(0, 2) << "\n";
-  std::cout << "P39: q= " << part.get_charge(39)
-	    << " pos= " << part.get_pos(39, 0) << ","
-	    << part.get_pos(39, 1) << ","
-	    << part.get_pos(39, 2) << "\n";
-  std::cout << "P40: q= " << part.get_charge(40)
-	    << " pos= " << part.get_pos(40, 0) << ","
-	    << part.get_pos(40, 1) << ","
-	    << part.get_pos(40, 2) << "\n";
-  std::cout << "P4839: q= " << part.get_charge(4839)
-	    << " pos= " << part.get_pos(4839, 0) << ","
-	    << part.get_pos(4839, 1) << ","
-	    << part.get_pos(4839, 2) << "\n";
+  std::cout << "rcut: " << rcut << "\n";
+  std::cout << "kmax: " << kmax << "\n";
+  // std::cout << "P0: q= " << part.get_charge(0)
+  // 	    << " pos= " << part.get_pos(0, 0) << ","
+  // 	    << part.get_pos(0, 1) << ","
+  // 	    << part.get_pos(0, 2) << "\n";
+  // std::cout << "P39: q= " << part.get_charge(39)
+  // 	    << " pos= " << part.get_pos(39, 0) << ","
+  // 	    << part.get_pos(39, 1) << ","
+  // 	    << part.get_pos(39, 2) << "\n";
+  // std::cout << "P40: q= " << part.get_charge(40)
+  // 	    << " pos= " << part.get_pos(40, 0) << ","
+  // 	    << part.get_pos(40, 1) << ","
+  // 	    << part.get_pos(40, 2) << "\n";
+  // std::cout << "P4839: q= " << part.get_charge(4839)
+  // 	    << " pos= " << part.get_pos(4839, 0) << ","
+  // 	    << part.get_pos(4839, 1) << ","
+  // 	    << part.get_pos(4839, 2) << "\n";
 
 
   unsigned ksize = pow((kmax+1),3);
@@ -48,16 +54,16 @@ int main() {
   
  
   auto start = std::chrono::high_resolution_clock::now();
-  double Ur = real_potential(part, L, alpha);
+  double Ur = real_potential(part, L, alpha, rcut);
   auto stop = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
-  std::cout << "Ur: " << Ur << " time: " << duration.count()*1.e-3 << " ms.\n";
+  std::cout << "Ur/N: " << Ur/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
 
   start = std::chrono::high_resolution_clock::now();
   double Uk = recip_potential(part, Kvec, L, alpha, kmax);
   stop = std::chrono::high_resolution_clock::now();
   duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
-  std::cout << "Uk: " << Uk << " time: " << duration.count()*1.e-3 << " ms.\n";
+  std::cout << "Uk/N: " << Uk/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
   
   return 0;
 }
