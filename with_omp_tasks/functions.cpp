@@ -68,6 +68,7 @@ double real_coulomb(const Particles &part, double L, int i, int j,
 }
 
 double real_potential(const Particles &part, double L, double alpha) {
+  //int count = 0;
   double Ur = 0;
   int N = part.get_Ntot();
 
@@ -95,10 +96,15 @@ double real_potential(const Particles &part, double L, double alpha) {
 	
 	#pragma omp atomic
 	Ur += partUr;
+
+	//#pragma omp atomic
+	//count += cnt;
       }
       
     }
   }
+  //printf("No. interactions: %d\n", count);
+  
   return Ur;
 }
 
@@ -157,6 +163,7 @@ double recip_coulomb(const Particles &part, int N, double kk2,
 
 double recip_potential(const Particles &part, const Kvector &Kvec,
 		       double L, double alpha, int kmax) {
+  //int count = 0;
   double Uk = 0;
 
   int N = part.get_Ntot();
@@ -183,10 +190,11 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
 	int nx = static_cast<int>(l) - kmax * ny;
 	int nsq = nx*nx + ny*ny + nz*nz;
 	
-	double kx = P2*nx;
-	double ky = P2*ny;
-	double kz = P2*nz;
 	if(nsq <= kmax2){ //if image is within a spherical shell...
+	  double kx = P2*nx;
+	  double ky = P2*ny;
+	  double kz = P2*nz;
+	  
 	  double kk2 = 2. * Kvec.get(kn) / V;  //mult by 2 for symmetry
 	  
 	  double K[4][3]; //Store kvectors 
@@ -196,6 +204,7 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
 	  K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
 	  
 	  partUk += recip_coulomb(part, N, kk2, K);
+	  //printf("U: %f\n", partUk);
 	
 	  //Correct for the symmetries used
 	  if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
@@ -203,6 +212,9 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
 	  else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
 		  || (nx == 0 && ny != 0 && nz != 0))
 	    partUk /= 2;
+
+	  //#pragma omp atomic
+	  //count += 1;
 	}
 	
 	#pragma omp atomic
@@ -221,6 +233,8 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
   self *= 0.5 * alpha / sqrt(M_PI);
 
   Uk -= self;
+
+  //printf("count: %d\n",count);
   
   return Uk;
 }

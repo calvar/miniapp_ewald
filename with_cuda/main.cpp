@@ -54,13 +54,13 @@ int main() {
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
   std::cout << "Ur: " << Ur << " time: " << duration.count()*1.e-3 << " ms.\n";
 
-  /*
+  
   start = std::chrono::high_resolution_clock::now();
   double Uk = recip_potential(part, Kvec, L, alpha, kmax);
   stop = std::chrono::high_resolution_clock::now();
   duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
   std::cout << "Uk: " << Uk << " time: " << duration.count()*1.e-3 << " ms.\n";
-  */  
+    
 
   return 0;
 }

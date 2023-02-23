@@ -114,27 +114,27 @@ double Particles::get_mom(int i, int a) const{
 
 
 //Array getters---------------------------------------------------------------
-int* Particles::get_Npart() {
+int* Particles::get_Npart() const{
   return Npart;
 }
 
-double* Particles::get_M() {
+double* Particles::get_M() const{
   return m;
 }
 
-double* Particles::get_R() {
+double* Particles::get_R() const{
   return r;
 }
 
-double* Particles::get_Q() {
+double* Particles::get_Q() const{
   return q;
 }
 
-double* Particles::get_X() {
+double* Particles::get_X() const{
   return pos;
 }
 
-double* Particles::get_P() {
+double* Particles::get_P() const{
   return mom;
 }
 
@@ -215,4 +215,8 @@ void Kvector::set(unsigned i, double val) {
   if(i >= _size)
     throw std::out_of_range("Kvector set: out of range.");
   kvec[i] = val;
+}
+
+double* Kvector::get_all() const{
+  return kvec;
 }

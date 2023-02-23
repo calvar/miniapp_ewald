@@ -36,12 +36,12 @@ public:
   double get_mom(int, int) const;
    
   //Array getters (these give access to private members! Think about friend functions)
-  int* get_Npart();
-  double* get_M();
-  double* get_R();
-  double* get_Q();
-  double* get_X();
-  double* get_P();
+  int* get_Npart() const;
+  double* get_M() const;
+  double* get_R() const;
+  double* get_Q() const;
+  double* get_X() const;
+  double* get_P() const;
   
   //Setters
   void set_mass(int, double);
@@ -65,6 +65,8 @@ public:
   unsigned size() const;
   double get(unsigned i) const;
   void set(unsigned i, double val);
+
+  double* get_all() const;
 };
 
 #endif

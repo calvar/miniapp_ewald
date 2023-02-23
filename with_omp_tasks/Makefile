@@ -6,8 +6,8 @@ LIBS		:=
 CXXFLAGS	:= -O3 -m64 -fno-inline #-pg
 LDFLAGS		:= -lgsl -lgslcblas -lgomp
 
-CXX		:= clang++ #dpcpp
-LINKER		:= clang++ #dpcpp
+CXX		:= g++ #clang++ #dpcpp
+LINKER		:= g++ #clang++ #dpcpp
 
 C_SOURCES	:= main.cpp functions.cpp classes.cpp
 HEADERS		:= functions.hpp classes.hpp
