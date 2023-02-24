@@ -9,7 +9,7 @@ bool chrg_conf(Particles& part, double L[3]){
   int NC = part.get_Nkinds();
   int Ntot = part.get_Ntot();
   char name[30];
-  sprintf(name, "conf.dat");
+  sprintf(name, "config.dat");
   std::ifstream Con(name);
   if(! Con){
     Con.close();
