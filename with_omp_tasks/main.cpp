@@ -22,7 +22,7 @@ int main() {
   }
   double L = l[0];
   double alpha = 1.0;
-  double kmax = 35; //has to be >= 1
+  double kmax = 20; //has to be >= 1
   double rcut_perc = 10;
   
   if(rcut_perc > 100) rcut_perc = 100;

@@ -5,7 +5,7 @@ INCLUDES 	+= #-I/usr/local/cuda/include
 LIBS		:= #-L/usr/local/cuda/lib64
 
 CXXFLAGS	:= -O3 -m64 #-stdlib=libc++ #-fno-inline -pg
-NVCCFLAGS	:= -O2 #--default-stream per-thread #--allow-unsupported-compiler #-g -G #allows per-thread default stream 
+NVCCFLAGS	:= -O3 #--default-stream per-thread #--allow-unsupported-compiler #-g -G #allows per-thread default stream 
 LDFLAGS		:= #-lgomp #-lgsl -lgslcblas 
 
 NVCC		:= nvcc

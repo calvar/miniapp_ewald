@@ -46,9 +46,27 @@ __device__ void atAddComplex(cuDoubleComplex* a, cuDoubleComplex b){
 
 
 //REAL PART-----------------------------------------------------------------
+__global__ void print_c(int **cells, unsigned nc, unsigned nn){
+  for(int i = 0; i < nc; i++){
+    printf("%d: ",i);
+    for(int j = 0; j < nn; j++)
+      printf("%d ",cells[i][j]);
+    printf("\n");
+  }
+}
+
+__device__ bool find(int **cells, unsigned sz, unsigned i, unsigned val) {
+  for(int k = 0; k < sz; k++){
+    if(cells[i][k] == val)
+      return true;
+  }
+  return false;
+}
+
 __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
-				    int N, double L, double alpha, double *Ur,
-				    double rcut/*,int *count*/) {
+				    unsigned *c, int N, double L, double alpha,
+				    int **cells, unsigned nc, unsigned nn,
+				    double *Ur, double rcut/*,int *count*/) {
 
   int i = threadIdx.x + blockDim.x * blockIdx.x;
   //shared variables for accumulated values
@@ -73,19 +91,23 @@ __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
     int j = i+1 - N*(static_cast<int>(floor((i+1)/N + 0.5)));
     int cnt = 0;
     while(cnt < mx){
-      rj = rad[j];
-      qj = chrg[j];
-      for(int a = 0; a < 3; ++a){
-	posij[a] = pos[i*3+a] - pos[j*3+a];
-	posij[a] -= L * floor(posij[a] / L + 0.5);
+      if(c[i] == c[j] || find(cells, nn, c[i], c[j])){
+	//printf("%d,%d\n",i,j);
+	rj = rad[j];
+	qj = chrg[j];
+	for(int a = 0; a < 3; ++a){
+	  posij[a] = pos[i*3+a] - pos[j*3+a];
+	  posij[a] -= L * floor(posij[a] / L + 0.5);
+	}
+	
+	double RIJSQ = posij[0]*posij[0] + posij[1]*posij[1] + posij[2]*posij[2];
+	if(RIJSQ < rcut*rcut){
+	  double RIJ = sqrt(RIJSQ);
+	  
+	  U += qi*qj * erfc(alpha*RIJ) / RIJ;
+	}
       }
       
-      double RIJSQ = posij[0]*posij[0] + posij[1]*posij[1] + posij[2]*posij[2];
-      if(RIJSQ < rcut*rcut){
-	double RIJ = sqrt(RIJSQ);
-	
-	U += qi*qj * erfc(alpha*RIJ) / RIJ;
-      }
       j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
       cnt++;
     }
@@ -107,17 +129,20 @@ __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
   }
 }
 
-double real_potential(const Particles &part, double L, double alpha,
-		      double rcut) {
+double real_potential(const Particles &part, const NeighborCells &ncells,
+		      double L, double alpha, double rcut) {
   int N = part.get_Ntot();
 
   double *d_rad, *d_chrg, *d_pos, *d_Ur;
+  unsigned *d_c;
+  int **d_cells;
   //int *d_count;
 
   //Get particle data arrays
   double* R = part.get_R();
   double* Q = part.get_Q();
   double* X = part.get_X();
+  unsigned* C = part.get_C();
 
   //Set service
   //cudaService(0);
@@ -129,7 +154,19 @@ double real_potential(const Particles &part, double L, double alpha,
   cudaMemcpy(d_chrg, Q, sizeof(double)*N, cudaMemcpyHostToDevice);
   cudaMalloc((void**)&d_pos, sizeof(double)*(3*N));
   cudaMemcpy(d_pos, X, sizeof(double)*(3*N), cudaMemcpyHostToDevice);
+  cudaMalloc((void**)&d_c, sizeof(unsigned)*N);
+  cudaMemcpy(d_c, C, sizeof(unsigned)*N, cudaMemcpyHostToDevice);
 
+  int **arr = ncells.get_array();
+  unsigned nc = ncells.get_ncells();
+  unsigned nn = ncells.get_nneigh();
+  cudaHostAlloc((void**)&d_cells, sizeof(unsigned*)*nc, cudaHostAllocMapped);
+  for(int i = 0; i < nc; i++){
+    cudaMalloc((void**)&d_cells[i], sizeof(unsigned)*nn);
+    cudaMemcpy(d_cells[i], arr[i], sizeof(unsigned)*nn, cudaMemcpyHostToDevice);
+  }
+  
+  
   //Define grid and block size
   int blocks = N / BLOCK_WIDTH;
   if(N % BLOCK_WIDTH) blocks++;
@@ -141,9 +178,11 @@ double real_potential(const Particles &part, double L, double alpha,
   //Kernel invocation
   dim3 dimGrid(blocks, 1, 1);
   dim3 dimBlock(BLOCK_WIDTH, 1, 1);
-  real_coulomb_kernel<<<dimGrid,dimBlock>>>(d_rad, d_chrg, d_pos, N, L, alpha,
-					    d_Ur, rcut/*, d_count*/);
-
+  real_coulomb_kernel<<<dimGrid,dimBlock>>>(d_rad, d_chrg, d_pos, d_c, N, L,
+					    alpha, d_cells, nc, nn, d_Ur,
+					    rcut/*, d_count*/);
+  //print_c<<<1,1>>>(d_cells, nc, nn);
+  
   // //copy output to host
   // int *count;
   // count = new int[blocks];
@@ -159,9 +198,14 @@ double real_potential(const Particles &part, double L, double alpha,
   Ur = new double[blocks];
   cudaMemcpy(Ur, d_Ur, sizeof(double)*blocks, cudaMemcpyDeviceToHost);
 
+  for(int i = 0; i < nc; i++)
+    cudaFree(d_cells[i]);
+  cudaFreeHost(d_cells);
+  
   cudaFree(d_rad);
   cudaFree(d_chrg);
   cudaFree(d_pos);
+  cudaFree(d_c);
   cudaFree(d_Ur);
   
   double tot_Ur = 0.;

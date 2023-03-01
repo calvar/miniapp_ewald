@@ -83,6 +83,7 @@ double real_potential(const Particles &part, const NeighborCells &ncells,
       #pragma omp task firstprivate(i) shared(Ur)
       {
 	double partUr = 0;
+	unsigned celli = part.get_cell(i);
 	
 	int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
 	if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
@@ -91,10 +92,9 @@ double real_potential(const Particles &part, const NeighborCells &ncells,
 	int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
 	int cnt = 0;
 	while(cnt < mx){
-	  unsigned celli = part.get_cell(i);
 	  unsigned cellj = part.get_cell(j);
 	  if(celli == cellj || ncells.find(celli, cellj)){
-	    //std::cout << i << "," << j << "\n";
+	    //printf("%d,%d\n",i,j);
 	    partUr += real_coulomb(part, L, i, j, alpha, rcut);
 	  }
 	  
