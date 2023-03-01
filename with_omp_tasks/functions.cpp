@@ -69,8 +69,8 @@ double real_coulomb(const Particles &part, double L, int i, int j,
   return U;
 }
 
-double real_potential(const Particles &part, double L, double alpha,
-		      double rcut) {
+double real_potential(const Particles &part, const NeighborCells &ncells,
+		      double L, double alpha, double rcut) {
   //int count = 0;
   double Ur = 0;
   int N = part.get_Ntot();
@@ -91,7 +91,12 @@ double real_potential(const Particles &part, double L, double alpha,
 	int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
 	int cnt = 0;
 	while(cnt < mx){
-	  partUr += real_coulomb(part, L, i, j, alpha, rcut);
+	  unsigned celli = part.get_cell(i);
+	  unsigned cellj = part.get_cell(j);
+	  if(celli == cellj || ncells.find(celli, cellj)){
+	    //std::cout << i << "," << j << "\n";
+	    partUr += real_coulomb(part, L, i, j, alpha, rcut);
+	  }
 	  
 	  j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
 	  cnt++;

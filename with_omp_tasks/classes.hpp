@@ -3,6 +3,33 @@
 
 #include <vector>
 #include <stdexcept>
+#include <cmath>
+
+//NeighborCells. The real space is divided into cells. Particles interact with
+// others in their cell and neighboring cells.
+class NeighborCells {
+private:
+  int **array;
+  unsigned side;
+  unsigned surf;
+  unsigned n_cells;
+  unsigned n_neighbors;
+  double L; //simulation box size
+  double len; //lenght of the cell
+
+  unsigned addone(int num);
+  unsigned subone(int num);
+  
+public:
+  NeighborCells(unsigned sz, double l);
+  ~NeighborCells();
+
+  double get_len() const;
+  bool find(unsigned i, unsigned j) const;
+  unsigned which_cell(double x, double y, double z) const;
+  void display() const;
+};
+
 
 //Class that stores particle positions and properties in 
 // 1D dynamicaly alocated arays, so that copying them
@@ -18,6 +45,8 @@ private:
 
   double* pos; //Position of each particle (linearized 3*N array)
   double* mom; //Momentum of each particle (linearized 3*N array)
+
+  unsigned* cells; //Cells in which each particle is located 
   
 public:
   Particles();
@@ -34,6 +63,7 @@ public:
   double get_charge(int) const;
   double get_pos(int, int) const;
   double get_mom(int, int) const;
+  unsigned get_cell(int) const;
    
   //Array getters (these give access to private members! Think about friend functions)
   int* get_Npart();
@@ -42,6 +72,7 @@ public:
   double* get_Q();
   double* get_X();
   double* get_P();
+  unsigned* get_C();
   
   //Setters
   void set_mass(int, double);
@@ -49,6 +80,7 @@ public:
   void set_charge(int, double);
   void set_pos(int, int, double);
   void set_mom(int, int, double);
+  void set_cells(const NeighborCells&);
 };
 
 
