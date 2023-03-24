@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <chrono>
 #include "functions.hpp"
-#include "dev_functions.hpp"
 #include "classes.hpp"
 
 
@@ -24,7 +23,7 @@ int main() {
   double L = l[0];
   double alpha = 1.0;
   double kmax = 20; //has to be >= 1
-  double rcut_perc = 100;
+  double rcut_perc = 10;
   
   if(rcut_perc > 100) rcut_perc = 100;
   double rcut = rcut_perc * (L/2) / 100;
@@ -50,7 +49,7 @@ int main() {
   // 	    << part.get_pos(4839, 1) << ","
   // 	    << part.get_pos(4839, 2) << "\n";
 
-
+  
   unsigned ksize = pow((kmax+1),3);
   Kvector Kvec(ksize);
   k_vector(Kvec, L, alpha, kmax);
@@ -62,14 +61,14 @@ int main() {
   auto stop = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
   std::cout << "Ur/N: " << Ur/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
-  
-  start = std::chrono::high_resolution_clock::now();
-  double Uk = recip_potential(part, Kvec, L, alpha, kmax);
-  stop = std::chrono::high_resolution_clock::now();
-  duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
-  std::cout << "Uk/N: " << Uk/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
-    
-  std::cout << "Total energy per particle: " << (Ur+Uk)/(N[0]+N[1]) << "\n";
+
+  // start = std::chrono::high_resolution_clock::now();
+  // double Uk = recip_potential(part, Kvec, L, alpha, kmax);
+  // stop = std::chrono::high_resolution_clock::now();
+  // duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
+  // std::cout << "Uk/N: " << Uk/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
+
+  // std::cout << "Total energy per particle: " << (Ur+Uk)/(N[0]+N[1]) << "\n";
   
   return 0;
 }

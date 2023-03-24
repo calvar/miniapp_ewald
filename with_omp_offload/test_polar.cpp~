@@ -1,0 +1,10 @@
+#include <cstdio>
+#include <complex>
+
+int main() {
+  std::complex<double> c = std::polar(-1., 1.);
+
+  printf("%f %f\n",c.real(),c.imag());
+  
+  return 0;
+}

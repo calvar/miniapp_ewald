@@ -153,11 +153,12 @@ double recip_coulomb(const Particles &part, int N, double kk2,
     double ri[3];
     for(int a = 0; a < 3; ++a)
       ri[a] = part.get_pos(i, a);
-    double qi = part.get_charge(i);
+    double qi = abs(part.get_charge(i));
+    double shift = part.get_charge(i) < 0 ? M_PI : 0;
     
     for(int b = 0; b < 4; b++){
       double rik = ri[0]*K[b][0] + ri[1]*K[b][1] + ri[2]*K[b][2]; 
-      sum[b] += std::polar(qi, rik);
+      sum[b] += std::polar(qi, rik+shift);
     }
   }
 
@@ -171,7 +172,7 @@ double recip_coulomb(const Particles &part, int N, double kk2,
 
 double recip_potential(const Particles &part, const Kvector &Kvec,
 		       double L, double alpha, int kmax) {
-  //int count = 0;
+  int count = 0;
   double Uk = 0;
 
   int N = part.get_Ntot();

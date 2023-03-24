@@ -1,7 +1,7 @@
 BIN		:= main
 
 INCLUDES 	+= 
-LIBS		:=
+LIBS		:= 
 
 CXXFLAGS	:= -O3 -m64 -fno-inline #-pg
 LDFLAGS		:= -lgsl -lgslcblas -lgomp

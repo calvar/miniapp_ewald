@@ -7,7 +7,7 @@
 int main() {
   double dens = 0.3;
   int Nkinds = 2;
-  std::vector<int> N = {5, 5};
+  std::vector<int> N = {100, 100};
   std::vector<double> m = {1.0, 1.0};
   std::vector<double> r = {0.5, 0.5};
   std::vector<double> q = {1.0, -1.0};
