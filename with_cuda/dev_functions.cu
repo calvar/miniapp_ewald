@@ -51,16 +51,12 @@ __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
 				    double rcut/*,int *count*/) {
 
   int i = threadIdx.x + blockDim.x * blockIdx.x;
-  //shared variables for accumulated values
-  //__shared__ int sum_cn[BLOCK_WIDTH];
-  __shared__ double sum_ur[BLOCK_WIDTH];
-  __syncthreads();
 
   //int lcount = 0;
   double U = 0.;
   double ri, qi, rj, qj;
   double posij[3];
-
+  
   if(i < N){
     ri = rad[i];
     qi = chrg[i];
@@ -90,21 +86,9 @@ __global__ void real_coulomb_kernel(double *rad, double *chrg, double *pos,
       cnt++;
     }
     //lcount += cnt;
+    Ur[i] = U;
   }
-
-  //Save local contribution
-  //sum_cn[threadIdx.x] = lcount;
-  sum_ur[threadIdx.x] = U;
-  __syncthreads();
-  //Add contributions
-  if(threadIdx.x == 0){
-    //count[blockIdx.x] = 0;
-    Ur[blockIdx.x] = 0.;
-    for(int k = 0; k < BLOCK_WIDTH; k++){
-      //count[blockIdx.x] += sum_cn[k];
-      Ur[blockIdx.x] += sum_ur[k];
-    }
-  }
+  
 }
 
 double real_potential(const Particles &part, double L, double alpha,
@@ -135,9 +119,9 @@ double real_potential(const Particles &part, double L, double alpha,
   if(N % BLOCK_WIDTH) blocks++;
 
   //Allocate memory for output
-  //cudaMalloc((void**)&d_count, sizeof(int)*blocks);
-  cudaMalloc((void**)&d_Ur, sizeof(double)*blocks);
-
+  //cudaMalloc((void**)&d_count, sizeof(int)*N);
+  cudaMalloc((void**)&d_Ur, sizeof(double)*N);
+  
   //Kernel invocation
   dim3 dimGrid(blocks, 1, 1);
   dim3 dimBlock(BLOCK_WIDTH, 1, 1);
@@ -146,18 +130,18 @@ double real_potential(const Particles &part, double L, double alpha,
 
   // //copy output to host
   // int *count;
-  // count = new int[blocks];
-  // cudaMemcpy(count, d_count, sizeof(int)*blocks, cudaMemcpyDeviceToHost);
+  // count = new int[N];
+  // cudaMemcpy(count, d_count, sizeof(int)*N, cudaMemcpyDeviceToHost);
 
   // int tot_count = 0;
-  // for(int i = 0; i < blocks; ++i)
+  // for(int i = 0; i < N; ++i)
   //   tot_count += count[i];
   // printf("No. interactions: %d\n", tot_count);
   
   //copy output to host
   double *Ur;
-  Ur = new double[blocks];
-  cudaMemcpy(Ur, d_Ur, sizeof(double)*blocks, cudaMemcpyDeviceToHost);
+  Ur = new double[N];
+  cudaMemcpy(Ur, d_Ur, sizeof(double)*N, cudaMemcpyDeviceToHost);
 
   cudaFree(d_rad);
   cudaFree(d_chrg);
@@ -165,7 +149,7 @@ double real_potential(const Particles &part, double L, double alpha,
   cudaFree(d_Ur);
   
   double tot_Ur = 0.;
-  for(int i = 0; i < blocks; ++i)
+  for(int i = 0; i < N; ++i)
     tot_Ur += Ur[i];
   
   delete[] Ur;
@@ -210,10 +194,6 @@ __global__ void recip_coulomb_kernel(double *chrg, double *pos, int N, int kmax,
 				     const double *Kvec, double L, double alpha,
 				     double *Uk/*, int *cnt*/) {
   int kn = threadIdx.x + blockDim.x * blockIdx.x;
-  //shared variables for accumulated values
-  //__shared__ int sum[BLOCK_WIDTH];
-  __shared__ double sum_uk[BLOCK_WIDTH];
-  __syncthreads();
 
   //int pcnt = 0;
   double U = 0.;
@@ -256,21 +236,9 @@ __global__ void recip_coulomb_kernel(double *chrg, double *pos, int N, int kmax,
 
       //pcnt += 1;
     }
+    Uk[kn] = U;
   }
-
-  //Save local contribution
-  //sum[threadIdx.x] = pcnt;
-  sum_uk[threadIdx.x] = U;
-  __syncthreads();
-  //Add contributions
-  if(threadIdx.x == 0){
-    //cnt[blockIdx.x] = 0;
-    Uk[blockIdx.x] = 0.;
-    for(int n = 0; n < BLOCK_WIDTH; n++){
-      //cnt[blockIdx.x] += sum[n];
-      Uk[blockIdx.x] += sum_uk[n];
-    }
-  }
+  
 }
 
 double recip_potential(const Particles &part, const Kvector &Kvec, double L,
@@ -307,8 +275,8 @@ double recip_potential(const Particles &part, const Kvector &Kvec, double L,
   if(kmax3 % BLOCK_WIDTH) blocks++;
 
   //Allocate memory for output
-  //cudaMalloc((void**)&d_cnt, sizeof(int)*blocks);
-  cudaMalloc((void**)&d_Uk, sizeof(double)*blocks);
+  //cudaMalloc((void**)&d_cnt, sizeof(int)*kmax3);
+  cudaMalloc((void**)&d_Uk, sizeof(double)*kmax3);
   
   //Kernel invocation
   dim3 dimGrid(blocks, 1, 1);
@@ -324,13 +292,13 @@ double recip_potential(const Particles &part, const Kvector &Kvec, double L,
   // //copy output to host
   // int *cnt;
   // cnt = new int[blocks];
-  // cudaMemcpy(cnt, d_cnt, sizeof(int)*blocks, cudaMemcpyDeviceToHost);
+  // cudaMemcpy(cnt, d_cnt, sizeof(int)*kmax, cudaMemcpyDeviceToHost);
   // cudaFree(d_cnt);
   
   //copy output to host
   double *Uk;
-  Uk = new double[blocks];
-  cudaMemcpy(Uk, d_Uk, sizeof(double)*blocks, cudaMemcpyDeviceToHost);
+  Uk = new double[kmax3];
+  cudaMemcpy(Uk, d_Uk, sizeof(double)*kmax3, cudaMemcpyDeviceToHost);
   
   cudaFree(d_chrg);
   cudaFree(d_pos);
@@ -338,13 +306,13 @@ double recip_potential(const Particles &part, const Kvector &Kvec, double L,
   cudaFree(d_Uk);
   
   double tot_Uk = 0.;
-  for(int i = 0; i < blocks; ++i)
+  for(int i = 0; i < kmax3; ++i)
     tot_Uk += Uk[i];
   
   delete[] Uk;
 
   // int count = 0;
-  // for(int i = 0; i < blocks; ++i)
+  // for(int i = 0; i < kmax3; ++i)
   //   count += cnt[i];
   // delete[] cnt;
   // printf("count: %d\n",count);
