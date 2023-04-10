@@ -1,0 +1,273 @@
+CPU
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+Address sizes:                   48 bits physical, 48 bits virtual
+CPU(s):                          64
+On-line CPU(s) list:             0-63
+Thread(s) per core:              2
+Core(s) per socket:              32
+Socket(s):                       1
+NUMA node(s):                    4
+Vendor ID:                       AuthenticAMD
+CPU family:                      25
+Model:                           1
+Model name:                      AMD EPYC 7543P 32-Core Processor
+Stepping:                        1
+CPU MHz:                         1796.243
+BogoMIPS:                        5589.11
+
+
+GPU
+Device name: NVIDIA A100-SXM4-40GB
+Compute capability: 8.0
+Warp size: 32
+Number of multiprocessors: 108
+Max threads per multiprocessor: 2048
+Max threads per block: 1024
+Global memory size (bytes): 42505273344
+Memory Clock Rate (KHz): 1215000
+Memory Bus Width (bits): 5120
+Peak Memory Bandwidth (GB/s): 1555.200000
+L2 cache size (bytes): 41943040
+Shared memory per block (bytes): 49152
+
+
+#------------Serial--------------------------------------------------
+# gnu compiler
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+cell size: 4.14178
+
+Ur/N: -0.00358042800152 time: 99677.241 ms.
+Uk/N: 0.134506565261 time: 62388.237 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 99496.231 ms.
+Uk/N: 0.134506565261 time: 62364.233 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 100204.929 ms.
+Uk/N: 0.134506565261 time: 62312.807 ms.
+Total energy per particle: 0.130926137259
+
+
+
+
+#-------------OpenMP--------------------------------------------------
+# gnu compiler
+
+
+# 6 threads
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+cell size: 4.14178
+
+Ur/N: -0.00358042800152 time: 16784.935 ms.
+Uk/N: 0.134506565261 time: 12642.276 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 16786.759 ms.
+Uk/N: 0.134506565261 time: 12670.332 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 16780.025 ms.
+Uk/N: 0.134506565261 time: 12631.381 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 16623.18 ms.
+Uk/N: 0.134506565261 time: 12620.815 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 16755.747 ms.
+Uk/N: 0.134506565261 time: 12613.547 ms.
+Total energy per particle: 0.130926137259
+
+
+
+# 14 threads
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+cell size: 4.14178
+
+Ur/N: -0.00358042800152 time: 7527.492 ms.
+Uk/N: 0.134506565261 time: 5678.689 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 7513.53 ms.
+Uk/N: 0.134506565261 time: 5679.393 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 7503.979 ms.
+Uk/N: 0.134506565261 time: 5688.177 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 7525.235 ms.
+Uk/N: 0.134506565261 time: 5692.946 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 7512.295 ms.
+Uk/N: 0.134506565261 time: 5680.641 ms.
+Total energy per particle: 0.130926137259
+
+
+
+# 28 threads
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+cell size: 4.14178
+
+Ur/N: -0.00358042800152 time: 3830.935 ms.
+Uk/N: 0.134506565261 time: 2958.292 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 3814.398 ms.
+Uk/N: 0.134506565261 time: 2971.852 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 3840.55 ms.
+Uk/N: 0.134506565261 time: 2970.49 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 3830.026 ms.
+Uk/N: 0.134506565261 time: 2959.804 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 3825.146 ms.
+Uk/N: 0.134506565261 time: 2979.072 ms.
+Total energy per particle: 0.130926137259
+
+
+
+#--------------CUDA--------------------------------------------------
+# gnu, nvcc compiler
+
+# 64 threads per block
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+
+Ur/N: -0.00358042800152 time: 314.152 ms.
+Uk/N: 0.134506565261 time: 149.696 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 313.268 ms.
+Uk/N: 0.134506565261 time: 154.382 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 309.155 ms.
+Uk/N: 0.134506565261 time: 154.42 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 313.164 ms.
+Uk/N: 0.134506565261 time: 154.533 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 312.806 ms.
+Uk/N: 0.134506565261 time: 133.201 ms.
+Total energy per particle: 0.130926137259
+
+
+# 128 threads per block
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+
+Ur/N: -0.00358042800152 time: 305.982 ms.
+Uk/N: 0.134506565261 time: 142.543 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 309.276 ms.
+Uk/N: 0.134506565261 time: 151 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 314.889 ms.
+Uk/N: 0.134506565261 time: 152.997 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 314.305 ms.
+Uk/N: 0.134506565261 time: 145.86 ms.
+Total energy per particle: 0.130926137259
+
+
+
+# 256 threads per block
+
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+
+Ur/N: -0.00358042800152 time: 306.877 ms.
+Uk/N: 0.134506565261 time: 181.248 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 305.358 ms.
+Uk/N: 0.134506565261 time: 181.053 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 313.742 ms.
+Uk/N: 0.134506565261 time: 181.135 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 307.103 ms.
+Uk/N: 0.134506565261 time: 152.599 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 308.929 ms.
+Uk/N: 0.134506565261 time: 159.609 ms.
+Total energy per particle: 0.130926137259
+
+
+
+# 512 threads per block
+
+100k particles
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+
+Ur/N: -0.00358042800152 time: 299.986 ms.
+Uk/N: 0.134506565261 time: 227.542 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 310.68 ms.
+Uk/N: 0.134506565261 time: 231.943 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 302.204 ms.
+Uk/N: 0.134506565261 time: 251.154 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 300.884 ms.
+Uk/N: 0.134506565261 time: 242.501 ms.
+Total energy per particle: 0.130926137259
+
+Ur/N: -0.00358042800152 time: 297.953 ms.
+Uk/N: 0.134506565261 time: 221.995 ms.
+Total energy per particle: 0.130926137259
+
+

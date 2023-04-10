@@ -5,7 +5,7 @@
 #include <fstream>
 #include <cmath>
 #include <omp.h>
-#include <gsl/gsl_rng.h>
+//#include <gsl/gsl_rng.h>
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]);

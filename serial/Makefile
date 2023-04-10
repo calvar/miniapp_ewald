@@ -3,11 +3,11 @@ BIN		:= main
 INCLUDES 	+= 
 LIBS		:= 
 
-CXXFLAGS	:= -O3 -m64 #-pg
-LDFLAGS		:= --stdlib=libc++ -fopenmp -fopenmp-targets=nvptx64 -Xopenmp-target=nvptx64 -march=sm_60 #-foffload="-lm" -lm -fopenmp -fcf-protection=none -fno-stack-protector -no-pie  #-lgsl -lgslcblas 
+CXXFLAGS	:= -O3 -m64  #-pg
+LDFLAGS		:= 
 
-CXX		:= clang++ #g++
-LINKER		:= clang++ #g++ 
+CXX		:= g++ #clang++ #dpcpp
+LINKER		:= g++ #clang++ #dpcpp
 
 C_SOURCES	:= main.cpp functions.cpp classes.cpp
 HEADERS		:= functions.hpp classes.hpp
@@ -19,7 +19,7 @@ $(BIN): $(C_OBJS) $(HEADERS)
 	$(LINKER) -o $@ $(C_OBJS) $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) $(LIBS)
 
 $(C_OBJS): $(C_SOURCES) $(HEADERS)
-	$(CXX) -c $(C_SOURCES) $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	$(CXX) -c $(C_SOURCES) $(CXXFLAGS) $(INCLUDES)
 
 clean: 
 	rm $(BIN) graphic *.o core*
