@@ -4,6 +4,7 @@
 #include <cstdio>
 
 const int NUM_THREADS = 6;
+const int TEAM_SIZE = 512; 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -181,9 +182,13 @@ double recip_potential(Particles &part, Kvector &Kvec,
   kmax += 1;
   int kmax2 = kmax*kmax;
   int kmax3 = kmax2*kmax;  
-  
+ 
+  //Define No. of teams 
+  int Nteams = N / TEAM_SIZE;
+  if(N % TEAM_SIZE) Nteams++;
+
   #pragma omp target data map(to: Q[:N], X[:3*N], kvec[:ksz]) map(from: Uk)
-  #pragma omp target teams distribute parallel for reduction(+:Uk)
+  #pragma omp target teams distribute parallel for reduction(+:Uk) num_threads(TEAM_SIZE) num_teams(Nteams) 
     for(int kn = 0; kn < kmax3; kn++){
 	double partUk = 0;
 	
