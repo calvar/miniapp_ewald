@@ -4,7 +4,7 @@ INCLUDES 	+=
 LIBS		:= 
 
 CXXFLAGS	:= -O3 -m64 #-pg
-LDFLAGS		:= --stdlib=libc++ -fopenmp -fopenmp-targets=nvptx64 -Xopenmp-target=nvptx64 -march=sm_60 #-foffload="-lm" -lm -fopenmp -fcf-protection=none -fno-stack-protector -no-pie  #-lgsl -lgslcblas 
+LDFLAGS		:= --stdlib=libc++ -fopenmp -fopenmp-targets=nvptx64 -Xopenmp-target=nvptx64 -march=sm_80 #-foffload="-lm" -lm -fopenmp -fcf-protection=none -fno-stack-protector -no-pie  #-lgsl -lgslcblas 
 
 CXX		:= clang++ #g++
 LINKER		:= clang++ #g++ 

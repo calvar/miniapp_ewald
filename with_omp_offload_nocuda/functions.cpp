@@ -80,29 +80,26 @@ double real_potential(Particles &part, NeighborCells &ncells,
 
   #pragma omp parallel num_threads(NUM_THREADS)
   #pragma omp single
-    #pragma omp taskloop reduction(+:Ur)
-    for(int i = 0; i < N; i++){
-	int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
-	if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
-	  mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
+  #pragma omp taskloop reduction(+:Ur)
+  for(int i = 0; i < N; i++){
+     int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
+     if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
+        mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
 	
-	int j = i+1 - N*static_cast<int>(floor(static_cast<float>(i+1)/N + 0.5));
-	int cnt = 0;
-	while(cnt < mx){
-	  unsigned celli = part.get_cell(i);
-	  unsigned cellj = part.get_cell(j);
-	  if(celli == cellj || ncells.find(celli, cellj)){
-	    //std::cout << i << "," << j << "\n";
-	    Ur += real_coulomb(part, L, i, j, alpha, rcut);
-	  }
+     int j = i+1 - N*static_cast<int>(floor(static_cast<float>(i+1)/N + 0.5));
+     int cnt = 0;
+     while(cnt < mx){
+       unsigned celli = part.get_cell(i);
+       unsigned cellj = part.get_cell(j);
+       if(celli == cellj || ncells.find(celli, cellj)){
+	 //std::cout << i << "," << j << "\n";
+	 Ur += real_coulomb(part, L, i, j, alpha, rcut);
+       }  
 	  
-	  j += 1 - N*static_cast<int>(floor(static_cast<float>(j+1)/N + 0.5));
-	  cnt++;
-	}
-
-	//#pragma omp atomic
-	//count += cnt;
-      }
+       j += 1 - N*static_cast<int>(floor(static_cast<float>(j+1)/N + 0.5));
+       cnt++;
+     }
+  }   
   //printf("No. interactions: %d\n", count);
   
   return Ur;
