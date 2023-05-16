@@ -4,6 +4,7 @@
 #include <cstdio>
 
 const int NUM_THREADS = 6;
+const int TEAM_SIZE = 512; 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -71,7 +72,7 @@ double real_coulomb(const Particles &part, double L, int i, int j,
   return U;
 }
 
-double real_potential(const Particles &part, const NeighborCells &ncells,
+double real_potential(Particles &part, NeighborCells &ncells,
 		      double L, double alpha, double rcut) {
   //int count = 0;
   double Ur = 0;
@@ -79,29 +80,26 @@ double real_potential(const Particles &part, const NeighborCells &ncells,
 
   #pragma omp parallel num_threads(NUM_THREADS)
   #pragma omp single
-    #pragma omp taskloop reduction(+:Ur)
-    for(int i = 0; i < N; i++){
-	int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
-	if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
-	  mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
+  #pragma omp taskloop reduction(+:Ur)
+  for(int i = 0; i < N; i++){
+     int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
+     if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
+        mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
 	
-	int j = i+1 - N*static_cast<int>(floor(static_cast<float>(i+1)/N + 0.5));
-	int cnt = 0;
-	while(cnt < mx){
-	  unsigned celli = part.get_cell(i);
-	  unsigned cellj = part.get_cell(j);
-	  if(celli == cellj || ncells.find(celli, cellj)){
-	    //std::cout << i << "," << j << "\n";
-	    Ur += real_coulomb(part, L, i, j, alpha, rcut);
-	  }
+     int j = i+1 - N*static_cast<int>(floor(static_cast<float>(i+1)/N + 0.5));
+     int cnt = 0;
+     while(cnt < mx){
+       unsigned celli = part.get_cell(i);
+       unsigned cellj = part.get_cell(j);
+       if(celli == cellj || ncells.find(celli, cellj)){
+	 //std::cout << i << "," << j << "\n";
+	 Ur += real_coulomb(part, L, i, j, alpha, rcut);
+       }  
 	  
-	  j += 1 - N*static_cast<int>(floor(static_cast<float>(j+1)/N + 0.5));
-	  cnt++;
-	}
-
-	//#pragma omp atomic
-	//count += cnt;
-      }
+       j += 1 - N*static_cast<int>(floor(static_cast<float>(j+1)/N + 0.5));
+       cnt++;
+     }
+  }   
   //printf("No. interactions: %d\n", count);
   
   return Ur;
@@ -129,7 +127,7 @@ void k_vector(Kvector& Kvec, double L, double alpha, int kmax) {
   }
 }
 
-double recip_coulomb(const Particles &part, int N, double kk2,
+double recip_coulomb(double *Q, double *X, int N, double kk2,
 		     const double K[][3]) {
   double U = 0;
   
@@ -143,9 +141,9 @@ double recip_coulomb(const Particles &part, int N, double kk2,
   for(int i = 0; i < N; i++){
     double ri[3];
     for(int a = 0; a < 3; ++a)
-      ri[a] = part.get_pos(i, a);
-    double qi = abs(part.get_charge(i));
-    double shift = part.get_charge(i) < 0 ? M_PI : 0;
+      ri[a] = X[i*3+a];
+    double qi = abs(Q[i]);
+    double shift = Q[i] < 0 ? M_PI : 0;
     
     for(int b = 0; b < 4; b++){
       double rik = ri[0]*K[b][0] + ri[1]*K[b][1] + ri[2]*K[b][2]; 
@@ -161,22 +159,33 @@ double recip_coulomb(const Particles &part, int N, double kk2,
   return U;
 }
 
-double recip_potential(const Particles &part, const Kvector &Kvec,
+double recip_potential(Particles &part, Kvector &Kvec,
 		       double L, double alpha, int kmax) {
   int count = 0;
   double Uk = 0;
 
   int N = part.get_Ntot();
   
+  //Get particle data arrays
+  double* Q = part.get_Q();
+  double* X = part.get_X();
+
+  //Get Kvec array
+  int ksz = Kvec.size();
+  double *kvec = Kvec.get_all();
+
   double V = L*L*L;
   double P2 = 2*M_PI/L;
   kmax += 1;
   int kmax2 = kmax*kmax;
   int kmax3 = kmax2*kmax;  
-  
-  #pragma omp parallel num_threads(NUM_THREADS)
-  #pragma omp single
-    #pragma omp taskloop reduction(+:Uk)
+ 
+  //Define No. of teams 
+  int Nteams = N / TEAM_SIZE;
+  if(N % TEAM_SIZE) Nteams++;
+
+  #pragma omp target data map(to: Q[:N], X[:3*N], kvec[:ksz]) map(from: Uk)
+  #pragma omp target teams distribute parallel for reduction(+:Uk) num_threads(TEAM_SIZE) num_teams(Nteams) 
     for(int kn = 0; kn < kmax3; kn++){
 	double partUk = 0;
 	
@@ -192,7 +201,7 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
 	  double ky = P2*ny;
 	  double kz = P2*nz;
 	  
-	  double kk2 = 2. * Kvec.get(kn) / V;  //mult by 2 for symmetry
+	  double kk2 = 2. * kvec[kn] / V;  //mult by 2 for symmetry
 	  
 	  double K[4][3]; //Store kvectors 
 	  K[0][0] = kx; K[0][1] = ky; K[0][2] = kz;
@@ -200,7 +209,7 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
 	  K[2][0] = kx; K[2][1] = -ky; K[2][2] = kz;
 	  K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
 	  
-	  partUk += recip_coulomb(part, N, kk2, K);
+	  partUk += recip_coulomb(Q, X, N, kk2, K);
 	  //printf("U: %f\n", partUk);
 	
 	  //Correct for the symmetries used
