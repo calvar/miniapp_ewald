@@ -76,19 +76,10 @@ double real_potential(const Particles &part, double L, double alpha, double rcut
   double Ur = 0;
   int N = part.get_Ntot();
 
-  for(int i = 0; i < N; i++){
-    int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
-    if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
-      mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
-    
-    int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
-    int cnt = 0;
-    while(cnt < mx){
+  for(int i = 0; i < N-1; i++){
+    for(int j = i+1; j < N; j++){
       //std::cout << i << "," << j << "\n";
       Ur += real_coulomb(part, L, i, j, alpha, rcut, count);
-
-      j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
-      cnt++;
     }
   }
   printf("No. interactions: %d\n", count);

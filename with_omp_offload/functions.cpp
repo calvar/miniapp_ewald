@@ -3,8 +3,9 @@
 #include <iostream>
 #include <cstdio>
 
-const int TEAM_SIZE = 512; //More than 512 in GTX1050ti gives erroneous results
+const int TEAM_SIZE = 256; //More than 512 in GTX1050ti gives erroneous results
 
+  
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -43,50 +44,19 @@ bool chrg_conf(Particles& part, double L[3]){
 }
 
 
-// //COMPLEX NUMBERS ----------------------------------------------------
-  
-// Complex::Complex(double r, double i){
-//   real = r;
-//   imag = i;
-// }
-
-// Complex& Complex::operator=(const Complex& c){
-//   real = c.real;
-//   imag = c.imag;
-//   return *this;
-// }
-
-// Complex& Complex::operator+=(const Complex& c){
-//   real += c.real;
-//   imag += c.imag;
-//   return *this;
-// }
-
-// Complex polar(double rho, double theta) {
-//   Complex c;
-//   c.real = rho * cos(theta);
-//   c.imag = rho * sin(theta);
-//   return c;
-// }
-
-// double norm(Complex a) {
-//   return sqrt(a.real*a.real + a.imag*a.imag);
-// }
-
-
 //Coulomb potential using Ewald summation---------------------------------------
 
 
 //REAL PART-----------------------------------------------------------------
 void real_coulomb_kernel(double *rad, double *chrg, double *pos, int N, double L,
-		  double alpha, double *Ur, double rcut/*,int *count*/) {
+		  double alpha, double *Ur, double rcut, int *count) {
   int thrid = omp_get_thread_num();
   int nthr = omp_get_num_threads();
   int tmid = omp_get_team_num();
   int ntm = omp_get_num_teams();
   int i = thrid + nthr * tmid;
 
-  //int lcount = 0;
+  int lcount = 0;
   double U = 0.;
   double ri, qi, rj, qj;
   double posij[3];
@@ -115,12 +85,14 @@ void real_coulomb_kernel(double *rad, double *chrg, double *pos, int N, double L
 	double RIJ = sqrt(RIJSQ);
 	
 	U += qi*qj * erfc(alpha*RIJ) / RIJ;
+	lcount++;
       }
       j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
       cnt++;
     }
 
     Ur[i] = U;
+    count[i] = lcount; 
     //printf("Particle %d taken by thread %d/%d of team %d/%d.\n",i,thrid,nthr,tmid,ntm);
   }
 }
@@ -139,23 +111,30 @@ double real_potential(const Particles &part, double L, double alpha,
   if(N % TEAM_SIZE) Nteams++;
 
   //Define output array
-  double *Ur = new double[N]; 
+  double *Ur = new double[N];
+  int *count = new int[N];
 
   //Prepare arrays in the device
-  #pragma omp target data map(to: R[:N], Q[:N], X[:3*N]) map(from: Ur[:N])
+#pragma omp target data map(to: R[:N], Q[:N], X[:3*N]) map(from: Ur[:N], count[:N])
   //Offload kernel
   #pragma omp target teams num_teams(Nteams)
   #pragma omp parallel num_threads(TEAM_SIZE)
   {    
-    real_coulomb_kernel(R, Q, X, N, L, alpha, Ur, rcut/*,count*/); 
+    real_coulomb_kernel(R, Q, X, N, L, alpha, Ur, rcut, count); 
   }
 
   double tot_Ur = 0;
-  for(int i = 0; i < N; i++)
+  int t_count = 0;
+  for(int i = 0; i < N; i++){
     tot_Ur += Ur[i];
+    t_count += count[i];
+  }
   
   delete[] Ur;
+  delete[] count;
 
+  printf("No. interactions: %d\n", t_count);
+  
   return tot_Ur;
 }
 

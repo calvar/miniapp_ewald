@@ -1,108 +1,6 @@
 #include "classes.hpp"
 #include <iostream>
 
-//NeighborCells*******************************************************************************
-//********************************************************************************************
-NeighborCells::NeighborCells(unsigned sz, double l) {
-  side = sz;
-  surf = side*side;
-  n_cells = surf*side;
-  n_neighbors = 26;
-  L = l;
-  len = L/side;
-  
-  array = new int*[n_cells];
-  for(int i = 0; i < n_cells; i++)
-    array[i] = new int[n_neighbors];
-
-  for(int i = 0; i < n_cells; i++){
-    unsigned lay = floor(i/surf);
-    unsigned row = floor((i-lay*surf)/side);
-    unsigned col = i - lay*surf - row*side;
-    
-    array[i][0] = subone(lay)*surf + subone(row)*side + subone(col);
-    array[i][1] = subone(lay)*surf + subone(row)*side + col;
-    array[i][2] = subone(lay)*surf + subone(row)*side + addone(col);
-    array[i][3] = subone(lay)*surf + row*side + subone(col);
-    array[i][4] = subone(lay)*surf + row*side + col;
-    array[i][5] = subone(lay)*surf + row*side + addone(col);
-    array[i][6] = subone(lay)*surf + addone(row)*side + subone(col);
-    array[i][7] = subone(lay)*surf + addone(row)*side + col;
-    array[i][8] = subone(lay)*surf + addone(row)*side + addone(col);
-
-    array[i][9] = lay*surf + subone(row)*side + subone(col);
-    array[i][10] = lay*surf + subone(row)*side + col;
-    array[i][11] = lay*surf + subone(row)*side + addone(col);
-    array[i][12] = lay*surf + row*side + subone(col);
-    array[i][13] = lay*surf + row*side + addone(col);
-    array[i][14] = lay*surf + addone(row)*side + subone(col);
-    array[i][15] = lay*surf + addone(row)*side + col;
-    array[i][16] = lay*surf + addone(row)*side + addone(col);
-    
-    array[i][17] = addone(lay)*surf + subone(row)*side + subone(col);
-    array[i][18] = addone(lay)*surf + subone(row)*side + col;
-    array[i][19] = addone(lay)*surf + subone(row)*side + addone(col);
-    array[i][20] = addone(lay)*surf + row*side + subone(col);
-    array[i][21] = addone(lay)*surf + row*side + col;
-    array[i][22] = addone(lay)*surf + row*side + addone(col);
-    array[i][23] = addone(lay)*surf + addone(row)*side + subone(col);
-    array[i][24] = addone(lay)*surf + addone(row)*side + col;
-    array[i][25] = addone(lay)*surf + addone(row)*side + addone(col);
-  }
-}
-
-NeighborCells::~NeighborCells() {
-  for(int i = 0; i < n_cells; i++)
-    delete[] array[i];
-  delete[] array;
-}
-
-unsigned NeighborCells::addone(int num) {
-  return static_cast<unsigned>( (num+1)%side );
-}
-
-unsigned NeighborCells::subone(int num) {
-  int res = num-1;
-  if(res < 0)
-    return static_cast<unsigned>( side-1 );
-  else
-    return static_cast<unsigned>( res%side );
-}
-
-double NeighborCells::get_len() const{
-  return len;
-}
-
-bool NeighborCells::find(unsigned i, unsigned val) const{
-  for(int j = 0; j < n_neighbors; j++){
-    //std::cout << array[i][j] << "\n";
-    if(array[i][j] == val)
-      return true;
-  }
-  return false;
-}
-
-unsigned NeighborCells::which_cell(double x, double y, double z) const{
-  double L2 = L/2;
-  // z -= L*floor(z/L+0.5);
-  // y -= L*floor(y/L+0.5);
-  // x -= L*floor(x/L+0.5);
-  unsigned lay = floor((z+L2)/len);
-  unsigned row = floor((y+L2)/len);
-  unsigned col = floor((x+L2)/len);
-  return lay*surf + row*side + col; 
-}
-
-void NeighborCells::display() const{
-  for(int i = 0;  i < n_cells; i++){
-    std::cout << i << ": ";
-    for(int j = 0; j < n_neighbors; j++)
-      std::cout << array[i][j] << " ";
-    std::cout << "\n";
-  }
-}
-
-
 
 
 //Particles*****************************************************************************
@@ -114,9 +12,7 @@ Particles::Particles(): Nkinds(1) {
   q = new double[1];
 
   pos = new double[3];
-  mom = new double[3];
-  
-  cells = new unsigned[1];
+  mom = new double[3];  
 }
 
 Particles::Particles(int kinds, const std::vector<int>& N, const std::vector<double>& mass,
@@ -132,7 +28,6 @@ Particles::Particles(int kinds, const std::vector<int>& N, const std::vector<dou
   m = new double[Ntot];
   r = new double[Ntot];
   q = new double[Ntot];
-  cells = new unsigned[Ntot];
   int i = 0;
   int sp = 0;
   int Nac = Npart[0];
@@ -144,7 +39,6 @@ Particles::Particles(int kinds, const std::vector<int>& N, const std::vector<dou
     m[i] = mass[sp];
     r[i] = rad[sp];
     q[i] = cha[sp];
-    cells[i] = 0;
     i++;
   }
   pos = new double[3*Ntot];
@@ -159,8 +53,6 @@ Particles::~Particles() {
   
   delete[] pos;
   delete[] mom;
-
-  delete[] cells;
 }
 
 
@@ -221,11 +113,6 @@ double Particles::get_mom(int i, int a) const{
   return mom[i*3+a];
 }
 
-//Get cell in which the particle is located
-unsigned Particles::get_cell(int i) const{
-  return cells[i];
-}
-
 
 
 //Array getters---------------------------------------------------------------
@@ -253,9 +140,6 @@ double* Particles::get_P() {
   return mom;
 }
 
-unsigned* Particles::get_C() {
-  return cells;
-}
 
 //Setters-------------------------------------------------------------------------
 //Set mass to particle "i"
@@ -304,11 +188,6 @@ void Particles::set_mom(int i, int a, double val){
   mom[i*3+a] = val;
 }
 
-//Set cell in which the particle is located
-void Particles::set_cells(const NeighborCells &ncells) {
-  for(int i = 0; i < Ntot; i++)
-    cells[i] = ncells.which_cell(pos[i*3+0], pos[i*3+1], pos[i*3+2]);
-}
 
 
 

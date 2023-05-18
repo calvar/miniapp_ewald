@@ -10,15 +10,15 @@
 bool chrg_conf(Particles& part, double L[3]);
 
 //Coulomb potential using Ewald summation--------------------------------------
-double real_coulomb(const Particles &part, double L, int i, int j,
-		    double rcut, int &count);
-double real_potential(const Particles &part, double L, double alpha,
+double real_coulomb(double *Q, double*X, double L, int i, int j,
+		    double alpha, double rcut, int &count);
+double real_potential(Particles &part, double L, double alpha,
 		      double rcut);
 
 void k_vector(Kvector &Kvec, double L, double alpha, int kmax);
 double recip_coulomb(const Particles &part, int N, double kk2,
 		     const double K[][3]);
-double recip_potential(const Particles &part, const Kvector &Kvec,
+double recip_potential(Particles &part, Kvector &Kvec,
 		       double L, double alpha, int kmax);
 //----------------------------------------------------------------------
 
