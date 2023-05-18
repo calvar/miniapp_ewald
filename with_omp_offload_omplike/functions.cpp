@@ -4,7 +4,7 @@
 #include <cstdio>
 
 const int NUM_THREADS = 6;
-const int TEAM_SIZE = 512; 
+const int TEAM_SIZE = 256; 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -45,14 +45,14 @@ bool chrg_conf(Particles& part, double L[3]){
 
 
 //Coulomb potential using Ewald summation---------------------------------------
-double real_coulomb(const Particles &part, double L, int i, int j,
-		    double alpha, double rcut) {
+double real_coulomb(double *Q, double*X, double L, int i, int j, double alpha,
+		    double rcut, int &count) {
   double U = 0;
     
   double ri[3], rj[3];
   for(int a = 0; a < 3; ++a){
-    ri[a] = part.get_pos(i, a);
-    rj[a] = part.get_pos(j, a);
+    ri[a] = X[i*3+a];
+    rj[a] = X[j*3+a];
   }
   double rij[3];
   for(int a = 0; a < 3; ++a){
@@ -62,45 +62,51 @@ double real_coulomb(const Particles &part, double L, int i, int j,
   double RIJSQ = rij[0]*rij[0] + rij[1]*rij[1] + rij[2]*rij[2];
 
   if(RIJSQ < rcut*rcut){
-    double qi = part.get_charge(i); 
-    double qj = part.get_charge(j);
+    double qi = Q[i]; 
+    double qj = Q[j];
     double r = sqrt(RIJSQ);
     
     U = qi*qj * erfc(alpha*r) / r;
+    count++;
   }
   
   return U;
 }
 
-double real_potential(Particles &part, NeighborCells &ncells,
-		      double L, double alpha, double rcut) {
-  //int count = 0;
+double real_potential(Particles &part, double L, double alpha, double rcut) {
+  int count = 0;
   double Ur = 0;
   int N = part.get_Ntot();
 
-  #pragma omp parallel num_threads(NUM_THREADS)
-  #pragma omp single
-  #pragma omp taskloop reduction(+:Ur)
+  //Get particle data arrays
+  double* Q = part.get_Q();
+  double* X = part.get_X();
+
+  //Define No. of teams 
+  int Nteams = N / TEAM_SIZE;
+  if(N % TEAM_SIZE) Nteams++;
+  
+  //#pragma omp parallel num_threads(NUM_THREADS)
+  //#pragma omp single
+  //#pragma omp taskloop reduction(+:Ur, count)
+  #pragma omp target data map(to: Q[:N], X[:3*N])
+  #pragma omp target teams distribute parallel for reduction(+:Ur, count) num_threads(TEAM_SIZE) num_teams(Nteams) 
   for(int i = 0; i < N; i++){
-     int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
-     if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
-        mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
-	
-     int j = i+1 - N*static_cast<int>(floor(static_cast<float>(i+1)/N + 0.5));
-     int cnt = 0;
-     while(cnt < mx){
-       unsigned celli = part.get_cell(i);
-       unsigned cellj = part.get_cell(j);
-       if(celli == cellj || ncells.find(celli, cellj)){
-	 //std::cout << i << "," << j << "\n";
-	 Ur += real_coulomb(part, L, i, j, alpha, rcut);
-       }  
-	  
-       j += 1 - N*static_cast<int>(floor(static_cast<float>(j+1)/N + 0.5));
-       cnt++;
-     }
-  }   
-  //printf("No. interactions: %d\n", count);
+    int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
+    if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
+      mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
+    
+    int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
+    int cnt = 0;
+    while(cnt < mx){
+      //std::cout << i << "," << j << "\n";
+      Ur += real_coulomb(Q, X, L, i, j, alpha, rcut, count);
+
+      j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
+      cnt++;
+    }
+  }
+  printf("No. interactions: %d\n", count);
   
   return Ur;
 }
@@ -181,54 +187,54 @@ double recip_potential(Particles &part, Kvector &Kvec,
   int kmax3 = kmax2*kmax;  
  
   //Define No. of teams 
-  int Nteams = N / TEAM_SIZE;
-  if(N % TEAM_SIZE) Nteams++;
+  int Nteams = kmax3 / TEAM_SIZE;
+  if(kmax3 % TEAM_SIZE) Nteams++;
 
-  #pragma omp target data map(to: Q[:N], X[:3*N], kvec[:ksz]) map(from: Uk)
+  #pragma omp target data map(to: Q[:N], X[:3*N], kvec[:ksz]) //map(from: Uk)
   #pragma omp target teams distribute parallel for reduction(+:Uk) num_threads(TEAM_SIZE) num_teams(Nteams) 
-    for(int kn = 0; kn < kmax3; kn++){
-	double partUk = 0;
-	
-	float knf = static_cast<float>(kn);
-	int nz = static_cast<int>(floor(knf/kmax2));
-	float l = knf - kmax2 * nz;
-	int ny = static_cast<int>(floor(l/kmax));
-	int nx = static_cast<int>(l) - kmax * ny;
-	int nsq = nx*nx + ny*ny + nz*nz;
-	
-	if(nsq <= kmax2){ //if image is within a spherical shell...
-	  double kx = P2*nx;
-	  double ky = P2*ny;
-	  double kz = P2*nz;
+  for(int kn = 0; kn < kmax3; kn++){
+    double partUk = 0;
+    
+    float knf = static_cast<float>(kn);
+    int nz = static_cast<int>(floor(knf/kmax2));
+    float l = knf - kmax2 * nz;
+    int ny = static_cast<int>(floor(l/kmax));
+    int nx = static_cast<int>(l) - kmax * ny;
+    int nsq = nx*nx + ny*ny + nz*nz;
+    
+    if(nsq <= kmax2){ //if image is within a spherical shell...
+      double kx = P2*nx;
+      double ky = P2*ny;
+      double kz = P2*nz;
 	  
-	  double kk2 = 2. * kvec[kn] / V;  //mult by 2 for symmetry
-	  
-	  double K[4][3]; //Store kvectors 
-	  K[0][0] = kx; K[0][1] = ky; K[0][2] = kz;
-	  K[1][0] = -kx; K[1][1] = ky; K[1][2] = kz;
-	  K[2][0] = kx; K[2][1] = -ky; K[2][2] = kz;
-	  K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
-	  
-	  partUk += recip_coulomb(Q, X, N, kk2, K);
-	  //printf("U: %f\n", partUk);
-	
-	  //Correct for the symmetries used
-	  if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
-	    partUk /= 4;
-	  else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
-		  || (nx == 0 && ny != 0 && nz != 0))
-	    partUk /= 2;
-
-	  //#pragma omp atomic
-	  //count += 1;
-	}
-	
-	Uk += partUk;
+      double kk2 = 2. * kvec[kn] / V;  //mult by 2 for symmetry
+      
+      double K[4][3]; //Store kvectors 
+      K[0][0] = kx; K[0][1] = ky; K[0][2] = kz;
+      K[1][0] = -kx; K[1][1] = ky; K[1][2] = kz;
+      K[2][0] = kx; K[2][1] = -ky; K[2][2] = kz;
+      K[3][0] = -kx; K[3][1] = -ky; K[3][2] = kz;
+      
+      partUk += recip_coulomb(Q, X, N, kk2, K);
+      //printf("U: %f\n", partUk);
+      
+      //Correct for the symmetries used
+      if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
+	partUk /= 4;
+      else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
+	      || (nx == 0 && ny != 0 && nz != 0))
+	partUk /= 2;
+      
+      //#pragma omp atomic
+      //count += 1;
     }
+    
+    Uk += partUk;
+  }
   
   //Self energy of the main cell
   double self = 0;
-#pragma omp parallel for reduction(+:self)
+  //#pragma omp parallel for reduction(+:self)
   for(int i = 0; i < N; i++){
     double qi = part.get_charge(i);
     self += qi*qi;

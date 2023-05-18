@@ -27,16 +27,11 @@ int main() {
   
   if(rcut_perc > 100) rcut_perc = 100;
   double rcut = rcut_perc * (L/2) / 100;
-
-  std::cout << floor(L/ceil(rcut)) << "\n";
-  unsigned cells_side = floor(L/ceil(rcut));
-  NeighborCells ncells(cells_side, L);
   
   std::cout << "L: " << L << "\n";
   std::cout << "alpha: " << alpha << "\n";
   std::cout << "rcut: " << rcut << "\n";
   std::cout << "kmax: " << kmax << "\n";
-  std::cout << "cell size: " << ncells.get_len() << "\n";
   // std::cout << "P0: q= " << part.get_charge(0)
   // 	    << " pos= " << part.get_pos(0, 0) << ","
   // 	    << part.get_pos(0, 1) << ","
@@ -58,20 +53,11 @@ int main() {
   unsigned ksize = pow((kmax+1),3);
   Kvector Kvec(ksize);
   k_vector(Kvec, L, alpha, kmax);
-
-  part.set_cells(ncells);
-
-  // //
-  // ncells.display();
-  // for(int i = 0; i < N[0]+N[1]; i++)
-  //   std::cout << part.get_cell(i) << " ";
-  // std::cout << "\n";
-  // //
   
   std::cout.precision(12);
   
   auto start = std::chrono::high_resolution_clock::now();
-  double Ur = real_potential(part, ncells, L, alpha, rcut);
+  double Ur = real_potential(part, L, alpha, rcut);
   auto stop = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
   std::cout << "Ur/N: " << Ur/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
