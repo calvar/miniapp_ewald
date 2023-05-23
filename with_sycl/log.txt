@@ -1,0 +1,1684 @@
+L: 41.1762
+alpha: 1
+rcut: 2.05881
+kmax: 20
+---> piPlatformsGet(
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a50a0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformsGet(
+	<unknown> : 1
+	<unknown> : 0x27c42c0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27c42c0[ 0x22a5c90 ... ]
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4f78
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 20
+	<char * > : 0x27cd1f0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 0x7ffed13a4ecc
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0[ nullptr ]
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 1
+	<unknown> : 0x27cf9e0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27cf9e0[ 0x27cf860 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4d98
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x27cfa88
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4162
+	<unknown> : 8
+	<unknown> : 0x27cfa90
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27cfa90[ 0 ... ]
+
+---> piDeviceRetain(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4144
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4bc8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4144
+	<unknown> : 55
+	<char * > : 0x27cfb00
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceRelease(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4c98
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4c70
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 8
+	<unknown> : 0x27cfc20
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceRelease(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 0x7ffed13a500c
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0[ nullptr ]
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 1
+	<unknown> : 0x27c42c0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27c42c0[ 0x27cf860 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4ed8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x27cfc78
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4162
+	<unknown> : 8
+	<unknown> : 0x27cfc80
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27cfc80[ 0 ... ]
+
+---> piDeviceRetain(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4144
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4d08
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4144
+	<unknown> : 55
+	<char * > : 0x27cfba0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceRelease(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4dd8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4db0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 8
+	<unknown> : 0x27cfa00
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+SYCL_PI_TRACE[all]: Requested device_type: info::device_type::automatic
+---> piextDeviceSelectBinary(
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5048
+	<unknown> : 1
+	<unknown> : 0x7ffed13a5044
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5048[ 0x423ea0 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4145
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4fe8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a4fe8[ 0x22a5c90 ... ]
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fd8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 20
+	<char * > : 0x27cfc40
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fd8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 22
+	<char * > : 0x27cfc40
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+SYCL_PI_TRACE[all]: Candidate device: -> score = 1500
+SYCL_PI_TRACE[all]:   platform: NVIDIA CUDA BACKEND
+SYCL_PI_TRACE[all]:   device: NVIDIA A100 80GB PCIe
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4145
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4fe8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a4fe8[ 0x22a5c90 ... ]
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fd8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 20
+	<char * > : 0x27cfa50
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fd8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 22
+	<char * > : 0x27cfa50
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+SYCL_PI_TRACE[all]: Selected device: -> final score = 1500
+SYCL_PI_TRACE[all]:   platform: NVIDIA CUDA BACKEND
+SYCL_PI_TRACE[all]:   device: NVIDIA A100 80GB PCIe
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 0x7ffed13a4efc
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0[ nullptr ]
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 1
+	<unknown> : 0x27c42c0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27c42c0[ 0x27cf860 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4dc8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceRelease(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4cc8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4ca0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 8
+	<unknown> : 0x27cf9e0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piContextCreate(
+	<unknown> : 0x7ffed13a4e80
+	<unknown> : 1
+	<unknown> : 0x27cfc40
+	<nullptr>
+	<nullptr>
+	<unknown> : 0x27c7da8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27cfc40[ 0x27cf860 ... ]
+	[out]<unknown> ** : 0x27c7da8[ 0x27cfb40 ... ]
+
+---> piextQueueCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a50d0
+	<unknown> : 0x7ffed13a50a8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a50a8[ 0x27d0310 ... ]
+
+---> piextUSMDeviceAlloc(
+	<unknown> : 0x7ffed13a5128
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5160
+	<unknown> : 160000
+	<unknown> : 8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5128[ 0x7fadcb200000 ... ]
+
+---> piextUSMEnqueueMemcpy(
+	<unknown> : 0x27d0310
+	<unknown> : 0
+	<unknown> : 0x7fadcb200000
+	<unknown> : 0x7fae24834010
+	<unknown> : 160000
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x7ffed13a51c8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x7fadcb200000
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x7ffed13a51c8[ 0x27d1320 ... ]
+
+---> piEventRelease(
+	pi_event : 0x27d1320
+) ---> 	pi_result : PI_SUCCESS
+
+---> piQueueFinish(
+	<unknown> : 0x27d0310
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextUSMDeviceAlloc(
+	<unknown> : 0x7ffed13a5128
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5160
+	<unknown> : 480000
+	<unknown> : 8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5128[ 0x7fadcb227200 ... ]
+
+---> piextUSMEnqueueMemcpy(
+	<unknown> : 0x27d0310
+	<unknown> : 0
+	<unknown> : 0x7fadcb227200
+	<unknown> : 0x7fae247be010
+	<unknown> : 480000
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x7ffed13a51c8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x7fadcb227200
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x7ffed13a51c8[ 0x27d1320 ... ]
+
+---> piEventRelease(
+	pi_event : 0x27d1320
+) ---> 	pi_result : PI_SUCCESS
+
+---> piQueueFinish(
+	<unknown> : 0x27d0310
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4098
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4abc
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4abc
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4100
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4a58
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4131
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4a58
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4100
+	<unknown> : 8
+	<unknown> : 0x7ffed13a3ef8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4131
+	<unknown> : 8
+	<unknown> : 0x7ffed13a3ef8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a33ac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a33ac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a33ac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a33ac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piMemBufferCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 8
+	<unknown> : 0
+	<unknown> : 0x7ffed13a3418
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+	[out]pi_mem * : 0x7ffed13a3418[ 0x27e2170 ... ]
+
+---> piEnqueueMemBufferWrite(
+	<unknown> : 0x27d0310
+	pi_mem : 0x27e2170
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 8
+	<char * > : 0x7ffed13a5418
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x27de4b8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x27de4b8[ 0x27e2210 ... ]
+
+---> piMemBufferCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 4
+	<unknown> : 0
+	<unknown> : 0x7ffed13a3418
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+	[out]pi_mem * : 0x7ffed13a3418[ 0x27e27a0 ... ]
+
+---> piEnqueueMemBufferWrite(
+	<unknown> : 0x27d0310
+	pi_mem : 0x27e27a0
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 4
+	<char * > : 0x7ffed13a53ac
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x27dfce8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x27dfce8[ 0x27e28a0 ... ]
+
+---> piMemBufferCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 160
+	<unknown> : 0
+	<unknown> : 0x7ffed13a3498
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+	[out]pi_mem * : 0x7ffed13a3498[ 0x27e2fd0 ... ]
+
+---> piMemBufferCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 80
+	<unknown> : 0
+	<unknown> : 0x7ffed13a3498
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+	[out]pi_mem * : 0x7ffed13a3498[ 0x27e3550 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 65576
+	<unknown> : 4
+	<unknown> : 0x7ffed13a2e9c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextDeviceSelectBinary(
+	<unknown> : 0x27cf860
+	<unknown> : 0x27e2260
+	<unknown> : 1
+	<unknown> : 0x7ffed13a2d9c
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27e2260[ 0x423ea0 ... ]
+
+---> piContextGetInfo(
+	<unknown> : 0x27cfb40
+	<unknown> : 4227
+	<unknown> : 4
+	<unknown> : 0x7ffed13a2bb8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piProgramCreateWithBinary(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 0x7ffed13a2bc8
+	<unknown> : 0x7ffed13a2ba0
+	<unknown> : 0x7ffed13a2ba8
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 0x7ffed13a2bbc
+	<unknown> : 0x7ffed13a2bc0
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a2ba8[ PÌU∫ ... ]
+	[out]<unknown> ** : 0x7ffed13a2bc0[ 0x27e36a0 ... ]
+
+---> piProgramBuild(
+	<unknown> : 0x27e36a0
+	<unknown> : 1
+	<unknown> : 0x27cfc70
+	<const char *>: --cuda-gpu-arch=sm_80
+	<nullptr>
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piKernelCreate(
+	<unknown> : 0x27e36a0
+	<const char *>: _ZTSN4sycl3_V16detail9reduction7MainKrnIZZ14real_potentialR9ParticlesdddENKUlRNS0_7handlerEE_clES7_E11real_kernelLNS2_8strategyE8EJNS1_5tupleIJNS0_8accessorIdLi1ELNS0_6access4modeE1026ELNSD_6targetE2014ELNSD_11placeholderE0ENS0_3ext6oneapi22accessor_property_listIJEEEEENSC_IiLi1ELSE_1026ELSF_2014ELSG_0ESK_EEEEEEEE
+	<unknown> : 0x7ffed13a31b8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a31b8[ 0x281dca0 ... ]
+
+---> piKernelSetExecInfo(
+	<unknown> : 0x281dca0
+	<unknown> : 0
+	<unknown> : 4
+	<unknown> : 0x7fae22e7b4f0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 0
+	<unknown> : 16
+	<unknown> : 0x27dafe0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27dafe0
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 1
+	<unknown> : 64
+	<unknown> : 0x27daff8
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27daff8
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 2
+	<unknown> : 1
+	<unknown> : 0x27db038
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27db038
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 3
+	<unknown> : 8192
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 4
+	<unknown> : 4096
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x281dca0
+	<unknown> : 5
+	<unknown> : 0x7ffed13a3260
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a3260[ 0x27e2fd0 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 6
+	<unknown> : 8
+	<unknown> : 0x27daa70
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27daa70
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x281dca0
+	<unknown> : 7
+	<unknown> : 0x7ffed13a3260
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a3260[ 0x27e3550 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 8
+	<unknown> : 8
+	<unknown> : 0x27dacd0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27dacd0
+
+---> piKernelSetArg(
+	<unknown> : 0x281dca0
+	<unknown> : 9
+	<unknown> : 2
+	<unknown> : 0x27db0d0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27db0d0
+
+---> piEnqueueKernelLaunch(
+	<unknown> : 0x27d0310
+	<unknown> : 0x281dca0
+	<unknown> : 1
+	<unknown> : 0x2261530
+	<unknown> : 0x2261500
+	<unknown> : 0x2261518
+	<unknown> : 2
+	pi_event * : 0x27e35b0[ 0x27e2210 ... ]
+	pi_event * : 0x27dccb8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x27e35b0[ 0x27e2210 ... ]
+	[out]pi_event * : 0x27dccb8[ 0x28413d0 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 65576
+	<unknown> : 4
+	<unknown> : 0x7ffed13a2e9c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextDeviceSelectBinary(
+	<unknown> : 0x27cf860
+	<unknown> : 0x27de650
+	<unknown> : 1
+	<unknown> : 0x7ffed13a2d9c
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27de650[ 0x423ea0 ... ]
+
+---> piKernelCreate(
+	<unknown> : 0x27e36a0
+	<const char *>: _ZTSN4sycl3_V16detail9reduction6AuxKrnIZZ14real_potentialR9ParticlesdddENKUlRNS0_7handlerEE_clES7_E11real_kernelLNS2_8strategyE8EJNS1_26IsNonUsmReductionPredicateEEEE
+	<unknown> : 0x7ffed13a31b8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a31b8[ 0x2854c00 ... ]
+
+---> piKernelSetExecInfo(
+	<unknown> : 0x2854c00
+	<unknown> : 0
+	<unknown> : 4
+	<unknown> : 0x7fae22e7b4f0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 0
+	<unknown> : 8
+	<unknown> : 0x2825ec0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x2825ec0
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 1
+	<unknown> : 1
+	<unknown> : 0x2825ec8
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x2825ec8
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 2
+	<unknown> : 160
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 3
+	<unknown> : 80
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x2854c00
+	<unknown> : 4
+	<unknown> : 0x7ffed13a3260
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a3260[ 0x27e2fd0 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 5
+	<unknown> : 8
+	<unknown> : 0x2825c50
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x2825c50
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x2854c00
+	<unknown> : 6
+	<unknown> : 0x7ffed13a3260
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a3260[ 0x27e3550 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 7
+	<unknown> : 8
+	<unknown> : 0x2825d30
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x2825d30
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x2854c00
+	<unknown> : 8
+	<unknown> : 0x7ffed13a3260
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a3260[ 0x27e2170 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 9
+	<unknown> : 8
+	<unknown> : 0x27d75a0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27d75a0
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x2854c00
+	<unknown> : 10
+	<unknown> : 0x7ffed13a3260
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a3260[ 0x27e27a0 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 11
+	<unknown> : 8
+	<unknown> : 0x27d7700
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27d7700
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 12
+	<unknown> : 16
+	<unknown> : 0x2825fa8
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x2825fa8
+
+---> piKernelSetArg(
+	<unknown> : 0x2854c00
+	<unknown> : 13
+	<unknown> : 2
+	<unknown> : 0x2825fbb
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x2825fbb
+
+---> piEnqueueKernelLaunch(
+	<unknown> : 0x27d0310
+	<unknown> : 0x2854c00
+	<unknown> : 1
+	<unknown> : 0x2826180
+	<unknown> : 0x2826150
+	<unknown> : 0x2826168
+	<unknown> : 5
+	pi_event * : 0x281ee80[ 0x28413d0 ... ]
+	pi_event * : 0x28264a8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x281ee80[ 0x28413d0 ... ]
+	[out]pi_event * : 0x28264a8[ 0x2849d50 ... ]
+
+---> piEventGetInfo(
+	pi_event : 0x28413d0
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a372c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEnqueueMemBufferRead(
+	<unknown> : 0x27d0310
+	pi_mem : 0x27e27a0
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 4
+	<char * > : 0x7ffed13a53ac
+	<unknown> : 1
+	pi_event * : 0x284a0f0[ 0x2849d50 ... ]
+	pi_event * : 0x229ce58[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x284a0f0[ 0x2849d50 ... ]
+	[out]pi_event * : 0x229ce58[ 0x27d1320 ... ]
+
+---> piEventGetInfo(
+	pi_event : 0x2849d50
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4f3c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventGetInfo(
+	pi_event : 0x28413d0
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4f3c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventGetInfo(
+	pi_event : 0x2849d50
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4dac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventGetInfo(
+	pi_event : 0x28413d0
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4dac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x28264a8[ 0x2849d50 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x28264a8[ 0x2849d50 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x27dccb8[ 0x28413d0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x27dccb8[ 0x28413d0 ... ]
+
+---> piMemRelease(
+	pi_mem : 0x27e2fd0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventGetInfo(
+	pi_event : 0x2849d50
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4dac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventGetInfo(
+	pi_event : 0x28413d0
+	<unknown> : 4563
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4dac
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x28264a8[ 0x2849d50 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x28264a8[ 0x2849d50 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x27dccb8[ 0x28413d0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x27dccb8[ 0x28413d0 ... ]
+
+---> piMemRelease(
+	pi_mem : 0x27e3550
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x229ce58[ 0x27d1320 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x229ce58[ 0x27d1320 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x229ce58[ 0x27d1320 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x229ce58[ 0x27d1320 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x28264a8[ 0x2849d50 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x28264a8[ 0x2849d50 ... ]
+
+---> piMemRelease(
+	pi_mem : 0x27e27a0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventRelease(
+	pi_event : 0x27d1320
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEnqueueMemBufferRead(
+	<unknown> : 0x27d0310
+	pi_mem : 0x27e2170
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 8
+	<char * > : 0x7ffed13a5418
+	<unknown> : 1
+	pi_event * : 0x27de930[ 0x2849d50 ... ]
+	pi_event * : 0x27df648[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x27de930[ 0x2849d50 ... ]
+	[out]pi_event * : 0x27df648[ 0x27daba0 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x27df648[ 0x27daba0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x27df648[ 0x27daba0 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x27df648[ 0x27daba0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x27df648[ 0x27daba0 ... ]
+
+---> piEventsWait(
+	<unknown> : 1
+	pi_event * : 0x28264a8[ 0x2849d50 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0x28264a8[ 0x2849d50 ... ]
+
+---> piMemRelease(
+	pi_mem : 0x27e2170
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventRelease(
+	pi_event : 0x27daba0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventRelease(
+	pi_event : 0x28413d0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventRelease(
+	pi_event : 0x27e2210
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventRelease(
+	pi_event : 0x27e28a0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piEventRelease(
+	pi_event : 0x2849d50
+) ---> 	pi_result : PI_SUCCESS
+
+No. interactions: 97227
+---> piQueueRelease(
+	<unknown> : 0x27d0310
+) ---> 	pi_result : PI_SUCCESS
+
+Ur/N: -0.00501443771204 time: 332.485 ms.
+20000 60000 9261
+---> piPlatformsGet(
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a50b0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformsGet(
+	<unknown> : 1
+	<unknown> : 0x27dce40
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27dce40[ 0x22a5c90 ... ]
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4f88
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 20
+	<char * > : 0x27d76c0
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 0x7ffed13a4edc
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0[ nullptr ]
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 1
+	<unknown> : 0x27e0b30
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27e0b30[ 0x27cf860 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4da8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceRelease(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4ca8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4c80
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 8
+	<unknown> : 0x27de930
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 0x7ffed13a501c
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0[ nullptr ]
+
+---> piDevicesGet(
+	pi_platform : 0x22a5c90
+	<unknown> : 4294967295
+	<unknown> : 1
+	<unknown> : 0x27dce40
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27dce40[ 0x27cf860 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4ee8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceRelease(
+	<unknown> : 0x27cf860
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4096
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4de8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4dc0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4164
+	<unknown> : 8
+	<unknown> : 0x27de670
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+SYCL_PI_TRACE[all]: Requested device_type: info::device_type::automatic
+---> piextDeviceSelectBinary(
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5058
+	<unknown> : 1
+	<unknown> : 0x7ffed13a5054
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5058[ 0x423ea0 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4145
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4ff8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a4ff8[ 0x22a5c90 ... ]
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fe8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 20
+	<char * > : 0x24d5d90
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fe8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 22
+	<char * > : 0x24d5d90
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+SYCL_PI_TRACE[all]: Candidate device: -> score = 1500
+SYCL_PI_TRACE[all]:   platform: NVIDIA CUDA BACKEND
+SYCL_PI_TRACE[all]:   device: NVIDIA A100 80GB PCIe
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4145
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4ff8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a4ff8[ 0x22a5c90 ... ]
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fe8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piPlatformGetInfo(
+	pi_platform : 0x22a5c90
+	<unknown> : 2306
+	<unknown> : 20
+	<char * > : 0x27de930
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 0
+	<nullptr>
+	<unknown> : 0x7ffed13a4fe8
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4139
+	<unknown> : 22
+	<char * > : 0x27de930
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+SYCL_PI_TRACE[all]: Selected device: -> final score = 1500
+SYCL_PI_TRACE[all]:   platform: NVIDIA CUDA BACKEND
+SYCL_PI_TRACE[all]:   device: NVIDIA A100 80GB PCIe
+---> piextQueueCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a50e0
+	<unknown> : 0x7ffed13a50b8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a50b8[ 0x27d0310 ... ]
+
+---> piextUSMDeviceAlloc(
+	<unknown> : 0x7ffed13a5138
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5170
+	<unknown> : 160000
+	<unknown> : 8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5138[ 0x7fadcb29c600 ... ]
+
+---> piextUSMDeviceAlloc(
+	<unknown> : 0x7ffed13a5138
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5170
+	<unknown> : 480000
+	<unknown> : 8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5138[ 0x7fadcb2c3800 ... ]
+
+---> piextUSMDeviceAlloc(
+	<unknown> : 0x7ffed13a5138
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a5170
+	<unknown> : 74088
+	<unknown> : 8
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a5138[ 0x7fadcb338c00 ... ]
+
+---> piextUSMEnqueueMemcpy(
+	<unknown> : 0x27d0310
+	<unknown> : 0
+	<unknown> : 0x7fadcb29c600
+	<unknown> : 0x7fae24834010
+	<unknown> : 160000
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x7ffed13a51d8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x7fadcb29c600
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x7ffed13a51d8[ 0x27daba0 ... ]
+
+---> piEventRelease(
+	pi_event : 0x27daba0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piQueueFinish(
+	<unknown> : 0x27d0310
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextUSMEnqueueMemcpy(
+	<unknown> : 0x27d0310
+	<unknown> : 0
+	<unknown> : 0x7fadcb2c3800
+	<unknown> : 0x7fae247be010
+	<unknown> : 480000
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x7ffed13a51d8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x7fadcb2c3800
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x7ffed13a51d8[ 0x27daba0 ... ]
+
+---> piEventRelease(
+	pi_event : 0x27daba0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piQueueFinish(
+	<unknown> : 0x27d0310
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextUSMEnqueueMemcpy(
+	<unknown> : 0x27d0310
+	<unknown> : 0
+	<unknown> : 0x7fadcb338c00
+	<unknown> : 0x2263620
+	<unknown> : 74088
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x7ffed13a51d8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x7fadcb338c00
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x7ffed13a51d8[ 0x27daba0 ... ]
+
+---> piEventRelease(
+	pi_event : 0x27daba0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piQueueFinish(
+	<unknown> : 0x27d0310
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4098
+	<unknown> : 4
+	<unknown> : 0x7ffed13a495c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a495c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4100
+	<unknown> : 8
+	<unknown> : 0x7ffed13a48f8
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a498c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 16785
+	<unknown> : 8
+	<unknown> : 0x7ffed13a4930
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextUSMDeviceAlloc(
+	<unknown> : 0x7ffed13a4698
+	<unknown> : 0x27cfb40
+	<unknown> : 0x27cf860
+	<unknown> : 0x7ffed13a46d0
+	<unknown> : 4
+	<unknown> : 4
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a4698[ 0x7fadcb34ae00 ... ]
+
+---> piextUSMEnqueueMemset(
+	<unknown> : 0x27d0310
+	<unknown> : 0x7fadcb34ae00
+	<unknown> : 0
+	<unknown> : 4
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x7ffed13a4738[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x7fadcb34ae00
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x7ffed13a4738[ 0x27e00e0 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a447c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 4149
+	<unknown> : 4
+	<unknown> : 0x7ffed13a447c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piMemBufferCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 8
+	<unknown> : 0
+	<unknown> : 0x7ffed13a44e8
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+	[out]pi_mem * : 0x7ffed13a44e8[ 0x27d7850 ... ]
+
+---> piEnqueueMemBufferWrite(
+	<unknown> : 0x27d0310
+	pi_mem : 0x27d7850
+	<unknown> : 0
+	<unknown> : 0
+	<unknown> : 8
+	<char * > : 0x7ffed13a5400
+	<unknown> : 0
+	pi_event * : 0[ nullptr ]
+	pi_event * : 0x22aecb8[ 0 ... ]
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_event * : 0[ nullptr ]
+	[out]pi_event * : 0x22aecb8[ 0x27e10c0 ... ]
+
+---> piMemBufferCreate(
+	<unknown> : 0x27cfb40
+	<unknown> : 1
+	<unknown> : 80
+	<unknown> : 0
+	<unknown> : 0x7ffed13a4568
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+	[out]pi_mem * : 0x7ffed13a4568[ 0x27d98c0 ... ]
+
+---> piDeviceGetInfo(
+	<unknown> : 0x27cf860
+	<unknown> : 65576
+	<unknown> : 4
+	<unknown> : 0x7ffed13a3f6c
+	<nullptr>
+) ---> 	pi_result : PI_SUCCESS
+
+---> piextDeviceSelectBinary(
+	<unknown> : 0x27cf860
+	<unknown> : 0x27e1980
+	<unknown> : 1
+	<unknown> : 0x7ffed13a3e6c
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x27e1980[ 0x423ea0 ... ]
+
+---> piKernelCreate(
+	<unknown> : 0x27e36a0
+	<const char *>: _ZTSN4sycl3_V16detail9reduction7MainKrnIZZ15recip_potentialR9ParticlesR7KvectorddiENKUlRNS0_7handlerEE_clES9_E12recip_kernelLNS2_8strategyE1EJPiEEE
+	<unknown> : 0x7ffed13a4288
+) ---> 	pi_result : PI_SUCCESS
+	[out]<unknown> ** : 0x7ffed13a4288[ 0x2853870 ... ]
+
+---> piKernelSetExecInfo(
+	<unknown> : 0x2853870
+	<unknown> : 0
+	<unknown> : 4
+	<unknown> : 0x7fae22e7b4f0
+) ---> 	pi_result : PI_SUCCESS
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 0
+	<unknown> : 72
+	<unknown> : 0x27de4a0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27de4a0
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 1
+	<unknown> : 8
+	<unknown> : 0x27de4e8
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27de4e8
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 2
+	<unknown> : 8
+	<unknown> : 0x27de4f0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27de4f0
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 3
+	<unknown> : 1
+	<unknown> : 0x27de4f8
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27de4f8
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x2853870
+	<unknown> : 4
+	<unknown> : 0x7ffed13a4330
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a4330[ 0x27d7850 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 5
+	<unknown> : 8
+	<unknown> : 0x27d73f0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27d73f0
+
+---> piextKernelSetArgMemObj(
+	<unknown> : 0x2853870
+	<unknown> : 6
+	<unknown> : 0x7ffed13a4330
+) ---> 	pi_result : PI_SUCCESS
+	[out]pi_mem * : 0x7ffed13a4330[ 0x27d98c0 ... ]
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 7
+	<unknown> : 8
+	<unknown> : 0x27dacd0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27dacd0
+
+---> piextKernelSetArgPointer(
+	<unknown> : 0x2853870
+	<unknown> : 8
+	<unknown> : 8
+	<unknown> : 0x27de540
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27de540
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 9
+	<unknown> : 4
+	<unknown> : 0
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0
+
+---> piKernelSetArg(
+	<unknown> : 0x2853870
+	<unknown> : 10
+	<unknown> : 8
+	<unknown> : 0x27de568
+) ---> 	pi_result : PI_SUCCESS
+	[out]void * : 0x27de568
+
+---> piEnqueueKernelLaunch(
+	<unknown> : 0x27d0310
+	<unknown> : 0x2853870
+	<unknown> : 1
+	<unknown> : 0x27dcf60
+	<unknown> : 0x27dcf30
+	<unknown> : 0x27dcf48
+	<unknown> : 3
+	pi_event * : 0x27d74d0[ 0x27e10c0 ... ]
+	pi_event * : 0x229ce58[ 0 ... ]
+) ---> 	pi_result : -5
+	[out]pi_event * : 0x27d74d0[ 0x27e10c0 ... ]
+	[out]pi_event * : 0x229ce58[ 0 ... ]
+
