@@ -3,8 +3,8 @@
 #include <iostream>
 #include <cstdio>
 
-const int NUM_THREADS = 6;
-const int TEAM_SIZE = 256; 
+const int LOCAL_RANGE_R = 50; //has to divide N
+const int LOCAL_RANGE_K = 27; //has to divide kmax3 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -105,11 +105,11 @@ double real_potential(Particles &part, double L, double alpha, double rcut) {
 
       //Enqueue parallel_for task (kernel)
       cgh.parallel_for<class real_kernel>(		    
-        sycl::range<1>(N),
+        sycl::nd_range<1>{sycl::range<1>(N), sycl::range<1>(LOCAL_RANGE_R)},
 	Ured,
 	Cred,
-        [=](sycl::id<1> idx, auto &Usum, auto &Csum) {
-	  int i = idx[0];
+        [=](sycl::nd_item<1> idx, auto &Usum, auto &Csum) {
+	  int i = idx.get_global_id(0);
           int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
           if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
             mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
@@ -211,6 +211,8 @@ double recip_potential(Particles &part, Kvector &Kvec,
   int kmax2 = kmax*kmax;
   unsigned kmax3 = static_cast<unsigned>(kmax2*kmax);  
  
+  std::cout << "kmax3 = " << kmax3 << "\n";
+
   sycl::queue myQueue;
   //sycl block
   {
@@ -236,10 +238,10 @@ double recip_potential(Particles &part, Kvector &Kvec,
 
       //Enqueue parallel_for task (kernel)
       cgh.parallel_for<class recip_kernel>(		    
-        sycl::range<1>(kmax3),
+        sycl::nd_range<1>{sycl::range<1>(kmax3), sycl::range<1>(LOCAL_RANGE_K)},
 	Ured,
-        [=](sycl::id<1> idx, auto &Usum) {
-	  int kn = idx[0];
+        [=](sycl::nd_item<1> idx, auto &Usum) {
+	  int kn = idx.get_global_id(0);
           double partUk = 0;
        
           float knf = static_cast<float>(kn);
@@ -279,6 +281,7 @@ double recip_potential(Particles &part, Kvector &Kvec,
       );// End of kernel
     }); // End of command block
   } // End of scope
+  myQueue.wait();	
 
 
   //Self energy of the main cell
