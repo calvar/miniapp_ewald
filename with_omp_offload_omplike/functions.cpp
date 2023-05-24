@@ -4,7 +4,8 @@
 #include <cstdio>
 
 const int NUM_THREADS = 6;
-const int TEAM_SIZE = 256; 
+const int TEAM_SIZE_R = 64; 
+const int TEAM_SIZE_K = 64; 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -46,7 +47,7 @@ bool chrg_conf(Particles& part, double L[3]){
 
 //Coulomb potential using Ewald summation---------------------------------------
 double real_coulomb(double *Q, double*X, double L, int i, int j, double alpha,
-		    double rcut, int &count) {
+		    double rcut/*, int &count*/) {
   double U = 0;
     
   double ri[3], rj[3];
@@ -67,14 +68,14 @@ double real_coulomb(double *Q, double*X, double L, int i, int j, double alpha,
     double r = sqrt(RIJSQ);
     
     U = qi*qj * erfc(alpha*r) / r;
-    count++;
+    //count++;
   }
   
   return U;
 }
 
 double real_potential(Particles &part, double L, double alpha, double rcut) {
-  int count = 0;
+  //int count = 0;
   double Ur = 0;
   int N = part.get_Ntot();
 
@@ -83,14 +84,11 @@ double real_potential(Particles &part, double L, double alpha, double rcut) {
   double* X = part.get_X();
 
   //Define No. of teams 
-  int Nteams = N / TEAM_SIZE;
-  if(N % TEAM_SIZE) Nteams++;
+  int Nteams = N / TEAM_SIZE_R;
+  if(N % TEAM_SIZE_R) Nteams++;
   
-  //#pragma omp parallel num_threads(NUM_THREADS)
-  //#pragma omp single
-  //#pragma omp taskloop reduction(+:Ur, count)
   #pragma omp target data map(to: Q[:N], X[:3*N])
-  #pragma omp target teams distribute parallel for reduction(+:Ur, count) num_threads(TEAM_SIZE) num_teams(Nteams) 
+  #pragma omp target teams distribute parallel for reduction(+:Ur/*, count*/) num_threads(TEAM_SIZE_R) num_teams(Nteams) 
   for(int i = 0; i < N; i++){
     int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
     if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
@@ -100,13 +98,13 @@ double real_potential(Particles &part, double L, double alpha, double rcut) {
     int cnt = 0;
     while(cnt < mx){
       //std::cout << i << "," << j << "\n";
-      Ur += real_coulomb(Q, X, L, i, j, alpha, rcut, count);
+      Ur += real_coulomb(Q, X, L, i, j, alpha, rcut/*, count*/);
 
       j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
       cnt++;
     }
   }
-  printf("No. interactions: %d\n", count);
+  //printf("No. interactions: %d\n", count);
   
   return Ur;
 }
@@ -187,11 +185,11 @@ double recip_potential(Particles &part, Kvector &Kvec,
   int kmax3 = kmax2*kmax;  
  
   //Define No. of teams 
-  int Nteams = kmax3 / TEAM_SIZE;
-  if(kmax3 % TEAM_SIZE) Nteams++;
+  int Nteams = kmax3 / TEAM_SIZE_K;
+  if(kmax3 % TEAM_SIZE_K) Nteams++;
 
   #pragma omp target data map(to: Q[:N], X[:3*N], kvec[:ksz]) //map(from: Uk)
-  #pragma omp target teams distribute parallel for reduction(+:Uk) num_threads(TEAM_SIZE) num_teams(Nteams) 
+  #pragma omp target teams distribute parallel for reduction(+:Uk) num_threads(TEAM_SIZE_K) num_teams(Nteams) 
   for(int kn = 0; kn < kmax3; kn++){
     double partUk = 0;
     

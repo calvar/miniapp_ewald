@@ -7,7 +7,7 @@
 
 int main() {
   int Nkinds = 2;
-  std::vector<int> N = {10000, 10000};//{40, 4800};
+  std::vector<int> N = {50000, 50000};//{40, 4800};
   std::vector<double> m = {1.0, 1.0};//{1.0, 0.022};
   std::vector<double> r = {0.5, 0.5};//{1.0, 0.06};
   std::vector<double> q = {1, -1};//{41.52, -0.346};

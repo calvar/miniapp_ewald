@@ -11,7 +11,7 @@ bool chrg_conf(Particles& part, double L[3]);
 
 //Coulomb potential using Ewald summation--------------------------------------
 double real_coulomb(double *Q, double*X, double L, int i, int j,
-		    double alpha, double rcut, int &count);
+		    double alpha, double rcut/*, int &count*/);
 double real_potential(Particles &part, double L, double alpha,
 		      double rcut);
 
