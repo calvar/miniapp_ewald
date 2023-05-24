@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdio>
 
-const int LOCAL_RANGE_R = 50; //has to divide N
+const int LOCAL_RANGE_R = 20; //has to divide N
 const int LOCAL_RANGE_K = 27; //has to divide kmax3 
 
 //Read configuration

@@ -5,7 +5,8 @@
 #include <iostream>
 #include "dev_functions.hpp"
 
-const int BLOCK_WIDTH = 768; //Max threads per block
+const int BLOCK_WIDTH_R = 256; //Max threads per block
+const int BLOCK_WIDTH_K = 64;  //Max threads per block
 const int K_SIM_SIZE = 4;
 
 
@@ -115,8 +116,8 @@ double real_potential(const Particles &part, double L, double alpha,
   cudaMemcpy(d_pos, X, sizeof(double)*(3*N), cudaMemcpyHostToDevice);
 
   //Define grid and block size
-  int blocks = N / BLOCK_WIDTH;
-  if(N % BLOCK_WIDTH) blocks++;
+  int blocks = N / BLOCK_WIDTH_R;
+  if(N % BLOCK_WIDTH_R) blocks++;
 
   //Allocate memory for output
   //cudaMalloc((void**)&d_count, sizeof(int)*N);
@@ -124,7 +125,7 @@ double real_potential(const Particles &part, double L, double alpha,
   
   //Kernel invocation
   dim3 dimGrid(blocks, 1, 1);
-  dim3 dimBlock(BLOCK_WIDTH, 1, 1);
+  dim3 dimBlock(BLOCK_WIDTH_R, 1, 1);
   real_coulomb_kernel<<<dimGrid,dimBlock>>>(d_rad, d_chrg, d_pos, N, L, alpha,
 					    d_Ur, rcut/*, d_count*/);
 
@@ -271,8 +272,8 @@ double recip_potential(const Particles &part, const Kvector &Kvec, double L,
   kmax += 1;
   int kmax2 = kmax*kmax;
   int kmax3 = kmax2*kmax;
-  int blocks = kmax3 / BLOCK_WIDTH;
-  if(kmax3 % BLOCK_WIDTH) blocks++;
+  int blocks = kmax3 / BLOCK_WIDTH_K;
+  if(kmax3 % BLOCK_WIDTH_K) blocks++;
 
   //Allocate memory for output
   //cudaMalloc((void**)&d_cnt, sizeof(int)*kmax3);
@@ -280,7 +281,7 @@ double recip_potential(const Particles &part, const Kvector &Kvec, double L,
   
   //Kernel invocation
   dim3 dimGrid(blocks, 1, 1);
-  dim3 dimBlock(BLOCK_WIDTH, 1, 1);
+  dim3 dimBlock(BLOCK_WIDTH_K, 1, 1);
   recip_coulomb_kernel<<<dimGrid,dimBlock>>>(d_chrg, d_pos, N, kmax, d_kvec, L,
 					     alpha, d_Uk/*, d_cnt*/);
   cudaDeviceSynchronize();

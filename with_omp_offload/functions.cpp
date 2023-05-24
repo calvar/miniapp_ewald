@@ -3,7 +3,9 @@
 #include <iostream>
 #include <cstdio>
 
-const int TEAM_SIZE = 256; //More than 512 in GTX1050ti gives erroneous results
+
+const int TEAM_SIZE_R = 64; //More than 512 in GTX1050ti gives erroneous results
+const int TEAM_SIZE_K = 64;  //More than 512 in GTX1050ti gives erroneous results
 
   
 
@@ -49,14 +51,14 @@ bool chrg_conf(Particles& part, double L[3]){
 
 //REAL PART-----------------------------------------------------------------
 void real_coulomb_kernel(double *rad, double *chrg, double *pos, int N, double L,
-		  double alpha, double *Ur, double rcut, int *count) {
+		  double alpha, double *Ur, double rcut/*, int *count*/) {
   int thrid = omp_get_thread_num();
   int nthr = omp_get_num_threads();
   int tmid = omp_get_team_num();
   int ntm = omp_get_num_teams();
   int i = thrid + nthr * tmid;
 
-  int lcount = 0;
+  //int lcount = 0;
   double U = 0.;
   double ri, qi, rj, qj;
   double posij[3];
@@ -85,14 +87,14 @@ void real_coulomb_kernel(double *rad, double *chrg, double *pos, int N, double L
 	double RIJ = sqrt(RIJSQ);
 	
 	U += qi*qj * erfc(alpha*RIJ) / RIJ;
-	lcount++;
+	//lcount++;
       }
       j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
       cnt++;
     }
 
     Ur[i] = U;
-    count[i] = lcount; 
+    //count[i] = lcount; 
     //printf("Particle %d taken by thread %d/%d of team %d/%d.\n",i,thrid,nthr,tmid,ntm);
   }
 }
@@ -107,33 +109,33 @@ double real_potential(const Particles &part, double L, double alpha,
   double* X = part.get_X();
 
   //Define No. of teams
-  int Nteams = N / TEAM_SIZE;
-  if(N % TEAM_SIZE) Nteams++;
+  int Nteams = N / TEAM_SIZE_R;
+  if(N % TEAM_SIZE_R) Nteams++;
 
   //Define output array
   double *Ur = new double[N];
-  int *count = new int[N];
+  //int *count = new int[N];
 
   //Prepare arrays in the device
-#pragma omp target data map(to: R[:N], Q[:N], X[:3*N]) map(from: Ur[:N], count[:N])
+  #pragma omp target data map(to: R[:N], Q[:N], X[:3*N]) map(from: Ur[:N]/*, count[:N]*/)
   //Offload kernel
   #pragma omp target teams num_teams(Nteams)
-  #pragma omp parallel num_threads(TEAM_SIZE)
+  #pragma omp parallel num_threads(TEAM_SIZE_R)
   {    
-    real_coulomb_kernel(R, Q, X, N, L, alpha, Ur, rcut, count); 
+    real_coulomb_kernel(R, Q, X, N, L, alpha, Ur, rcut/*, count*/); 
   }
 
   double tot_Ur = 0;
-  int t_count = 0;
+  //int t_count = 0;
   for(int i = 0; i < N; i++){
     tot_Ur += Ur[i];
-    t_count += count[i];
+    //t_count += count[i];
   }
   
   delete[] Ur;
-  delete[] count;
+  //delete[] count;
 
-  printf("No. interactions: %d\n", t_count);
+  //printf("No. interactions: %d\n", t_count);
   
   return tot_Ur;
 }
@@ -268,8 +270,8 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
   int kmax3 = kmax2*kmax;
 
   //Define No. of teams
-  int Nteams = N / TEAM_SIZE;
-  if(N % TEAM_SIZE) Nteams++;
+  int Nteams = kmax3 / TEAM_SIZE_K;
+  if(kmax3 % TEAM_SIZE_K) Nteams++;
 
   //Define output array
   double *Uk = new double[kmax3]; 
@@ -278,7 +280,7 @@ double recip_potential(const Particles &part, const Kvector &Kvec,
   #pragma omp target data map(to: Q[:N], X[:3*N], kvec[:ksz]) map(from: Uk[:kmax3])
   //Offload kernel
   #pragma omp target teams num_teams(Nteams)
-  #pragma omp parallel num_threads(TEAM_SIZE)
+  #pragma omp parallel num_threads(TEAM_SIZE_K)
   {    
      recip_coulomb_kernel(Q, X, N, kmax, kvec, L, alpha, Uk/*,cnt*/);
   }

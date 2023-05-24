@@ -54,7 +54,7 @@ bool chrg_conf(Particles& part, double L[3]);
 //double real_coulomb_kernel(const Particles &part, double L, int i, int j,
 //			   double rcut);
 void real_coulomb_kernel(double *rad, double *chrg, double *pos, int N, double L,
-			 double alpha, double *Ur, double rcut, int *count);
+			 double alpha, double *Ur, double rcut/*, int *count*/);
 double real_potential(const Particles &part, double L, double alpha,
 		      double rcut);
 
