@@ -1,0 +1,10 @@
+#Profile with readable output
+nsys nvprof main
+
+
+#Profile
+nsys profile main
+#Export report to .txt format
+nsys export report.qdrep --type=text
+#Analyse (time)
+nsys analyse report.qdrep

@@ -1,0 +1,55 @@
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+Ur/N: -0.00358042800152 time: 427.918 ms.
+Uk/N: 0.134506565261 time: 369.006 ms.
+Total energy per particle: 0.130926137259
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls  Average (ns)   Minimum (ns)  Maximum (ns)   StdDev (ns)               Name             
+ -------  ---------------  ---------  -------------  ------------  ------------  -------------  -----------------------------
+    75.5      434,815,774          2  217,407,887.0    67,444,177   367,371,597  212,080,712.5  cuMemcpyDtoHAsync_v2         
+    22.7      130,796,765          1  130,796,765.0   130,796,765   130,796,765            0.0  cuDevicePrimaryCtxRelease_v2 
+     0.6        3,600,976          1    3,600,976.0     3,600,976     3,600,976            0.0  cuModuleLoadDataEx           
+     0.3        1,972,653          6      328,775.5         7,945       944,058      450,936.9  cuMemAlloc_v2                
+     0.3        1,649,412          8      206,176.5         5,731     1,173,435      399,030.3  cuMemcpyHtoDAsync_v2         
+     0.2        1,053,041          2      526,520.5        17,503     1,035,538      719,859.5  cuLaunchKernel               
+     0.2          958,095          6      159,682.5         8,627       452,302      193,928.8  cuMemFree_v2                 
+     0.1          490,664         32       15,333.3         1,673       270,213       51,328.6  cuStreamCreate               
+     0.0          186,357          1      186,357.0       186,357       186,357            0.0  cuModuleUnload               
+     0.0           72,288         32        2,259.0         1,653         9,808        1,675.5  cuStreamDestroy_v2           
+     0.0           48,118          5        9,623.6         4,017        20,528        6,806.8  cuStreamSynchronize          
+     0.0           21,392         32          668.5           390         5,550          913.6  cuEventCreate                
+     0.0           11,599         32          362.5           280         1,252          167.5  cuEventDestroy_v2            
+     0.0            1,002          1        1,002.0         1,002         1,002            0.0  cuDevicePrimaryCtxSetFlags_v2
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances  Average (ns)   Minimum (ns)  Maximum (ns)  StdDev (ns)                                        Name                                       
+ -------  ---------------  ---------  -------------  ------------  ------------  -----------  ---------------------------------------------------------------------------------
+    84.5      367,358,542          1  367,358,542.0   367,358,542   367,358,542          0.0  __omp_offloading_9491be2_3201ffae__Z15recip_potentialR9ParticlesR7Kvectorddi_l192
+    15.5       67,442,192          1   67,442,192.0    67,442,192    67,442,192          0.0  __omp_offloading_9491be2_3201ffae__Z14real_potentialR9Particlesddd_l91           
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Count  Average (ns)  Minimum (ns)  Maximum (ns)  StdDev (ns)      Operation     
+ -------  ---------------  -----  ------------  ------------  ------------  -----------  ------------------
+    98.7          352,066      8      44,008.3         1,536       156,129     58,737.7  [CUDA memcpy HtoD]
+     1.3            4,640      2       2,320.0         2,048         2,592        384.7  [CUDA memcpy DtoH]
+
+
+
+CUDA Memory Operation Statistics (by size):
+
+ Total (MB)  Count  Average (MB)  Minimum (MB)  Maximum (MB)  StdDev (MB)      Operation     
+ ----------  -----  ------------  ------------  ------------  -----------  ------------------
+      6.474      8         0.809         0.000         2.400        1.040  [CUDA memcpy HtoD]
+      0.000      2         0.000         0.000         0.000        0.000  [CUDA memcpy DtoH]
+
