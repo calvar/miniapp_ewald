@@ -1,0 +1,28 @@
+Generating SQLite file report2.sqlite from report2.qdrep
+Using report2.sqlite for SQL queries.
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/async-memcpy-pageable.py report2.sqlite]... 
+
+There were no problems detected related to memcpy operations using pageable
+memory.
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/sync-memcpy.py report2.sqlite]... 
+
+There were no problems detected related to synchronous memcpy operations.
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/sync-memset.py report2.sqlite]... SKIPPED: report2.sqlite could not be analyzed because it does not contain CUDA trace data.
+
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/sync-api.py report2.sqlite]... 
+
+There were no problems detected related to synchronization APIs.
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/gpu-starvation.py report2.sqlite]... 
+
+There were no problems detected with GPU utilization. GPU was not found to be
+idle for more than 500ms.
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/gpu-low-utilization.py report2.sqlite]... 
+
+There were no problems detected with GPU utilization. No time regions have an
+average GPU utilization below 50%.
+

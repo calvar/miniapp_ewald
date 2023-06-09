@@ -1,0 +1,46 @@
+L: 70.4102
+alpha: 1
+rcut: 3.52051
+kmax: 20
+Ur/N: -0.00358042800152 time: 555.269 ms.
+Uk/N: 0.134506565261 time: 121.803 ms.
+Total energy per particle: 0.130926137259
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls  Average (ns)   Minimum (ns)  Maximum (ns)   StdDev (ns)           Name         
+ -------  ---------------  ---------  -------------  ------------  ------------  -------------  ---------------------
+    64.4      339,038,277          8   42,379,784.6         5,601   338,533,365  119,664,130.7  cudaMalloc           
+    22.5      118,716,995          1  118,716,995.0   118,716,995   118,716,995            0.0  cudaDeviceSynchronize
+    12.2       64,052,321          8    8,006,540.1        31,970    62,651,489   22,080,315.3  cudaMemcpy           
+     0.8        4,283,111          2    2,141,555.5     1,165,722     3,117,389    1,380,037.0  cudaLaunchKernel     
+     0.1          677,353          8       84,669.1         9,538       248,443       84,417.7  cudaFree             
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances  Average (ns)   Minimum (ns)  Maximum (ns)  StdDev (ns)                                              Name                                            
+ -------  ---------------  ---------  -------------  ------------  ------------  -----------  --------------------------------------------------------------------------------------------
+    66.0      118,922,531          1  118,922,531.0   118,922,531   118,922,531          0.0  recip_coulomb_kernel(double *, double *, int, int, const double *, double, double, double *)
+    34.0       61,148,784          1   61,148,784.0    61,148,784    61,148,784          0.0  real_coulomb_kernel(double *, double *, double *, int, double, double, double *, double)    
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Count  Average (ns)  Minimum (ns)  Maximum (ns)  StdDev (ns)      Operation     
+ -------  ---------------  -----  ------------  ------------  ------------  -----------  ------------------
+    88.0          422,150      6      70,358.3         5,088       162,177     68,259.1  [CUDA memcpy HtoD]
+    12.0           57,601      2      28,800.5         5,120        52,481     33,489.3  [CUDA memcpy DtoH]
+
+
+
+CUDA Memory Operation Statistics (by size):
+
+ Total (MB)  Count  Average (MB)  Minimum (MB)  Maximum (MB)  StdDev (MB)      Operation     
+ ----------  -----  ------------  ------------  ------------  -----------  ------------------
+      7.274      6         1.212         0.074         2.400        0.962  [CUDA memcpy HtoD]
+      0.874      2         0.437         0.074         0.800        0.513  [CUDA memcpy DtoH]
+

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdio>
 
-const int LOCAL_RANGE_R = 20; //has to divide N
+const int LOCAL_RANGE_R = 500; //has to divide N
 const int LOCAL_RANGE_K = 27; //has to divide kmax3 
 
 //Read configuration
@@ -130,7 +130,7 @@ double real_potential(Particles &part, double L, double alpha, double rcut) {
     }); //End of command queue
   } //End of scope
 
-  printf("No. interactions: %d\n", count);
+  //printf("No. interactions: %d\n", count);
   
   return Ur;
 }
@@ -211,7 +211,7 @@ double recip_potential(Particles &part, Kvector &Kvec,
   int kmax2 = kmax*kmax;
   unsigned kmax3 = static_cast<unsigned>(kmax2*kmax);  
  
-  std::cout << "kmax3 = " << kmax3 << "\n";
+  //std::cout << "kmax3 = " << kmax3 << "\n";
 
   sycl::queue myQueue;
   //sycl block

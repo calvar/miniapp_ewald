@@ -1,9 +1,15 @@
 #include <iostream>
+#include <iomanip>
 #include <chrono>
-#include "classes.hpp"
+#include <cstdlib>
+#include <cmath>
 #include "functions.hpp"
+#include "classes.hpp"
 
-int main() {
+
+int main(int argc, char *argv[]) {
+  int Nreps = atoi(argv[1]);
+
   int Nkinds = 2;
   std::vector<int> N = {50000, 50000};//{40, 4800};
   std::vector<double> m = {1.0, 1.0};//{1.0, 0.022};
@@ -22,10 +28,10 @@ int main() {
   double alpha = 1.0;
   double kmax = 20; //has to be >= 1
   double rcut_perc = 10;
-
+  
   if(rcut_perc > 100) rcut_perc = 100;
   double rcut = rcut_perc * (L/2) / 100;
-
+  
   std::cout << "L: " << L << "\n";
   std::cout << "alpha: " << alpha << "\n";
   std::cout << "rcut: " << rcut << "\n";
@@ -47,23 +53,49 @@ int main() {
   // 	    << part.get_pos(4839, 1) << ","
   // 	    << part.get_pos(4839, 2) << "\n";
 
+
   unsigned ksize = pow((kmax+1),3);
   Kvector Kvec(ksize);
   k_vector(Kvec, L, alpha, kmax);
   
   std::cout.precision(12);
   
-  auto start = std::chrono::high_resolution_clock::now();
-  double Ur = real_potential(part, L, alpha, rcut);
-  auto stop = std::chrono::high_resolution_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
-  std::cout << "Ur/N: " << Ur/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
+  double tac_r = 0;
+  double tsqac_r = 0;
+  double tac_k = 0;
+  double tsqac_k = 0;
+  double Ur, Uk;
+  for(int n = 0; n < Nreps; n++){
+     auto start = std::chrono::high_resolution_clock::now();
+     Ur = real_potential(part, L, alpha, rcut);
+     auto stop = std::chrono::high_resolution_clock::now();
+     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
+     double t = duration.count()*1.e-3;
+     tac_r += t;
+     tsqac_r += t*t;
 
-  start = std::chrono::high_resolution_clock::now();
-  double Uk = recip_potential(part, Kvec, L, alpha, kmax);
-  stop = std::chrono::high_resolution_clock::now();
-  duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
-  std::cout << "Uk/N: " << Uk/(N[0]+N[1]) << " time: " << duration.count()*1.e-3 << " ms.\n";
+     start = std::chrono::high_resolution_clock::now();
+     Uk = recip_potential(part, Kvec, L, alpha, kmax);
+     stop = std::chrono::high_resolution_clock::now();
+     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
+     t = duration.count()*1.e-3;
+     tac_k += t;
+     tsqac_k += t*t;
+  
+     std::cout << "Repetitions: " << n+1 << "\n";
+  }
+
+  double tav_r = tac_r/Nreps;
+  double tsd_r = sqrt(tsqac_r/Nreps - tav_r*tav_r);
+  std::cout << "Ur/N: " << Ur/(N[0]+N[1]) 
+	    << " time: " << tav_r << " +/- " 
+	    << tsd_r << " ms.\n";
+  
+  double tav_k = tac_k/Nreps;
+  double tsd_k = sqrt(tsqac_k/Nreps - tav_k*tav_k);
+  std::cout << "Uk/N: " << Uk/(N[0]+N[1]) 
+	    << " time: " << tav_k << " +/- " 
+	    << tsd_k << " ms.\n";
     
   std::cout << "Total energy per particle: " << (Ur+Uk)/(N[0]+N[1]) << "\n";
   

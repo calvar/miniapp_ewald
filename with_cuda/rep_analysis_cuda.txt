@@ -1,0 +1,51 @@
+Using report1.sqlite for SQL queries.
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/async-memcpy-pageable.py report1.sqlite]... 
+
+There were no problems detected related to memcpy operations using pageable
+memory.
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/sync-memcpy.py report1.sqlite]... 
+
+The following are synchronous memory transfers that block the host. This does
+not include host to device transfers of a memory block of 64 KB or less.
+
+Suggestion: Use cudaMemcpy*Async() APIs instead.
+
+ Duration (ns)   Start (ns)    Src Kind  Dst Kind  Bytes (MB)   PID    Device ID  Context ID  Stream ID      API Name    
+ -------------  -------------  --------  --------  ----------  ------  ---------  ----------  ---------  ----------------
+       125,345    916,296,841  Pageable  Device         2.400  24,584          0           1          7  cudaMemcpy_v3020
+       107,009    979,046,261  Pageable  Device         2.400  24,584          0           1          7  cudaMemcpy_v3020
+        34,048    915,623,139  Pageable  Device         0.800  24,584          0           1          7  cudaMemcpy_v3020
+        33,601    978,874,835  Pageable  Device         0.800  24,584          0           1          7  cudaMemcpy_v3020
+        33,600    978,009,612  Device    Pageable       0.800  24,584          0           1          7  cudaMemcpy_v3020
+        33,568    916,088,167  Pageable  Device         0.800  24,584          0           1          7  cudaMemcpy_v3020
+         5,056    979,171,158  Pageable  Device         0.074  24,584          0           1          7  cudaMemcpy_v3020
+         5,025  1,099,182,080  Device    Pageable       0.074  24,584          0           1          7  cudaMemcpy_v3020
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/sync-memset.py report1.sqlite]... SKIPPED: report1.sqlite could not be analyzed because it does not contain CUDA trace data.
+
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/sync-api.py report1.sqlite]... 
+
+The following are synchronization APIs that block the host until all issued
+CUDA calls are complete.
+
+Suggestions:
+   1. Avoid excessive use of synchronization.
+   2. Use asynchronous CUDA event calls, such as cudaStreamWaitEvent() and
+cudaEventSynchronize(), to prevent host synchronization.
+
+ Duration (ns)  Start (ns)    PID     TID             API Name          
+ -------------  -----------  ------  ------  ---------------------------
+   118,826,807  979,782,924  24,584  24,584  cudaDeviceSynchronize_v3020
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/gpu-starvation.py report1.sqlite]... 
+
+There were no problems detected with GPU utilization. GPU was not found to be
+idle for more than 500ms.
+
+Running [/soft/compilers/cudatoolkit/cuda-11.4.4/nsight-systems-2021.3.2/target-linux-x64/rules/gpu-low-utilization.py report1.sqlite]... 
+
+There were no problems detected with GPU utilization. No time regions have an
+average GPU utilization below 50%.
+

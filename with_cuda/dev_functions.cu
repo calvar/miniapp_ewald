@@ -6,7 +6,7 @@
 #include "dev_functions.hpp"
 
 const int BLOCK_WIDTH_R = 256; //Max threads per block
-const int BLOCK_WIDTH_K = 64;  //Max threads per block
+const int BLOCK_WIDTH_K = 128;  //Max threads per block
 const int K_SIM_SIZE = 4;
 
 
