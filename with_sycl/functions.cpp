@@ -4,7 +4,7 @@
 #include <cstdio>
 
 const int LOCAL_RANGE_R = 500; //has to divide N
-const int LOCAL_RANGE_K = 27; //has to divide kmax3 
+const int LOCAL_RANGE_K = 441; //has to divide kmax3 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){

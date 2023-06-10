@@ -4,8 +4,8 @@
 #include <cstdio>
 
 const int NUM_THREADS = 6;
-const int TEAM_SIZE_R = 128; 
-const int TEAM_SIZE_K = 64; 
+const int TEAM_SIZE_R = 512; 
+const int TEAM_SIZE_K = 512; 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
