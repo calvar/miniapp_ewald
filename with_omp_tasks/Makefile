@@ -3,11 +3,11 @@ BIN		:= main
 INCLUDES 	+= 
 LIBS		:= 
 
-CXXFLAGS	:= -O3 -m64 -fno-inline -pg
+CXXFLAGS	:= -O3 -m64 -fno-inline #-pg
 #LDFLAGS		:= -lgsl -lgslcblas -lgomp
 
-CXX		:= clang++ #g++ #clang++ #dpcpp
-LINKER		:= clang++ #g++ #clang++ #dpcpp
+CXX		:= clang++ #g++ #dpcpp
+LINKER		:= clang++ #g++ #dpcpp
 
 C_SOURCES	:= main.cpp functions.cpp classes.cpp
 HEADERS		:= functions.hpp classes.hpp

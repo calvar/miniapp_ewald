@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdio>
 
-const int NUM_THREADS = 6;
+const int NUM_THREADS = 64;
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -45,7 +45,7 @@ bool chrg_conf(Particles& part, double L[3]){
 
 //Coulomb potential using Ewald summation---------------------------------------
 double real_coulomb(const Particles &part, double L, int i, int j,
-		    double alpha, double rcut) {
+		    double alpha, double rcut, int &count) {
   double U = 0;
     
   double ri[3], rj[3];
@@ -66,44 +66,38 @@ double real_coulomb(const Particles &part, double L, int i, int j,
     double r = sqrt(RIJSQ);
     
     U = qi*qj * erfc(alpha*r) / r;
+    count++;
   }
   
   return U;
 }
 
-double real_potential(const Particles &part, const NeighborCells &ncells,
-		      double L, double alpha, double rcut) {
-  //int count = 0;
+double real_potential(const Particles &part, double L, double alpha, 
+		      double rcut) {
+  int count = 0;
   double Ur = 0;
   int N = part.get_Ntot();
 
   #pragma omp parallel num_threads(NUM_THREADS)
   #pragma omp single
-    #pragma omp taskloop reduction(+:Ur)
-    for(int i = 0; i < N; i++){
-	int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
-	if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
-	  mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
-	
-	int j = i+1 - N*static_cast<int>(floor(static_cast<float>(i+1)/N + 0.5));
-	int cnt = 0;
-	while(cnt < mx){
-	  unsigned celli = part.get_cell(i);
-	  unsigned cellj = part.get_cell(j);
-	  if(celli == cellj || ncells.find(celli, cellj)){
-	    //std::cout << i << "," << j << "\n";
-	    Ur += real_coulomb(part, L, i, j, alpha, rcut);
-	  }
-	  
-	  j += 1 - N*static_cast<int>(floor(static_cast<float>(j+1)/N + 0.5));
-	  cnt++;
-	}
+  #pragma omp taskloop reduction(+:Ur, count)
+  for(int i = 0; i < N; i++){
+    int mx = static_cast<int>(ceil(static_cast<float>(N-1)/2));
+    if(fmod(static_cast<float>(N),2) == 0. && i >= N/2)
+      mx = static_cast<int>(floor(static_cast<float>(N-1)/2));
+    
+    int j = i+1 - N*static_cast<int>(floor((i+1)/N + 0.5));
+    int cnt = 0;
+    while(cnt < mx){
+      //std::cout << i << "," << j << "\n";
+      Ur += real_coulomb(part, L, i, j, alpha, rcut, count);
 
-	//#pragma omp atomic
-	//count += cnt;
-      }
-  //printf("No. interactions: %d\n", count);
-  
+      j += 1 - N*static_cast<int>(floor((j+1)/N + 0.5));
+      cnt++;
+    }
+  }
+  printf("No. interactions: %d\n", count);
+
   return Ur;
 }
 
@@ -144,7 +138,7 @@ double recip_coulomb(const Particles &part, int N, double kk2,
     double ri[3];
     for(int a = 0; a < 3; ++a)
       ri[a] = part.get_pos(i, a);
-    double qi = abs(part.get_charge(i));
+    double qi = std::abs(part.get_charge(i));
     double shift = part.get_charge(i) < 0 ? M_PI : 0;
     
     for(int b = 0; b < 4; b++){
