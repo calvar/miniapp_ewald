@@ -4,7 +4,7 @@
 #include <cstdio>
 
 const int LOCAL_RANGE_R = 500; //has to divide N
-const int LOCAL_RANGE_K = 441; //has to divide kmax3 
+const int LOCAL_RANGE_K = 27; //has to divide kmax3 
 
 //Read configuration
 bool chrg_conf(Particles& part, double L[3]){
@@ -271,7 +271,7 @@ double recip_potential(Particles &part, Kvector &Kvec,
             if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
 	      partUk /= 4;
             else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
-	            || (nx == 0 && ny != 0 && nz != 0))
+	           || (nx == 0 && ny != 0 && nz != 0))
 	      partUk /= 2;
            
           }

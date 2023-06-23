@@ -2,10 +2,108 @@ L: 70.4102
 alpha: 1
 rcut: 3.52051
 kmax: 20
-No. interactions: 2581303
-Ur/N: -0.00358042800152 time: 622.75 ms.
-kmax3 = 9261
-Uk/N: 0.134506565261 time: 122.574 ms.
+Repetitions: 1
+Repetitions: 2
+Repetitions: 3
+Repetitions: 4
+Repetitions: 5
+Repetitions: 6
+Repetitions: 7
+Repetitions: 8
+Repetitions: 9
+Repetitions: 10
+Repetitions: 11
+Repetitions: 12
+Repetitions: 13
+Repetitions: 14
+Repetitions: 15
+Repetitions: 16
+Repetitions: 17
+Repetitions: 18
+Repetitions: 19
+Repetitions: 20
+Repetitions: 21
+Repetitions: 22
+Repetitions: 23
+Repetitions: 24
+Repetitions: 25
+Repetitions: 26
+Repetitions: 27
+Repetitions: 28
+Repetitions: 29
+Repetitions: 30
+Repetitions: 31
+Repetitions: 32
+Repetitions: 33
+Repetitions: 34
+Repetitions: 35
+Repetitions: 36
+Repetitions: 37
+Repetitions: 38
+Repetitions: 39
+Repetitions: 40
+Repetitions: 41
+Repetitions: 42
+Repetitions: 43
+Repetitions: 44
+Repetitions: 45
+Repetitions: 46
+Repetitions: 47
+Repetitions: 48
+Repetitions: 49
+Repetitions: 50
+Repetitions: 51
+Repetitions: 52
+Repetitions: 53
+Repetitions: 54
+Repetitions: 55
+Repetitions: 56
+Repetitions: 57
+Repetitions: 58
+Repetitions: 59
+Repetitions: 60
+Repetitions: 61
+Repetitions: 62
+Repetitions: 63
+Repetitions: 64
+Repetitions: 65
+Repetitions: 66
+Repetitions: 67
+Repetitions: 68
+Repetitions: 69
+Repetitions: 70
+Repetitions: 71
+Repetitions: 72
+Repetitions: 73
+Repetitions: 74
+Repetitions: 75
+Repetitions: 76
+Repetitions: 77
+Repetitions: 78
+Repetitions: 79
+Repetitions: 80
+Repetitions: 81
+Repetitions: 82
+Repetitions: 83
+Repetitions: 84
+Repetitions: 85
+Repetitions: 86
+Repetitions: 87
+Repetitions: 88
+Repetitions: 89
+Repetitions: 90
+Repetitions: 91
+Repetitions: 92
+Repetitions: 93
+Repetitions: 94
+Repetitions: 95
+Repetitions: 96
+Repetitions: 97
+Repetitions: 98
+Repetitions: 99
+Repetitions: 100
+Ur/N: -0.00358042800152 time: 59.67347 +/- 52.6781174843 ms.
+Uk/N: 0.134506565261 time: 124.53373 +/- 0.166440491186 ms.
 Total energy per particle: 0.130926137259
 
 
@@ -13,23 +111,23 @@ CUDA API Statistics:
 
  Time(%)  Total Time (ns)  Num Calls  Average (ns)  Minimum (ns)  Maximum (ns)  StdDev (ns)           Name        
  -------  ---------------  ---------  ------------  ------------  ------------  ------------  --------------------
-    98.1      172,807,740          3  57,602,580.0        25,587   120,545,686  60,438,977.0  cuMemcpyDtoHAsync_v2
-     0.6        1,009,650          2     504,825.0       242,191       767,459     371,420.6  cuModuleLoadDataEx  
-     0.4          745,067          5     149,013.4        15,208       276,525     104,083.3  cuMemcpyAsync       
-     0.3          580,340         10      58,034.0         3,927       234,877      84,355.4  cuMemAlloc_v2       
-     0.2          432,705          2     216,352.5       172,200       260,505      62,441.1  cuModuleUnload      
-     0.1          126,537         21       6,025.6           882        33,823       9,879.1  cuStreamSynchronize 
-     0.0           78,658         13       6,050.6         2,925        21,500       4,862.5  cuStreamCreate      
-     0.0           76,913          3      25,637.7        16,721        40,275      12,776.6  cuLaunchKernel      
-     0.0           56,005          5      11,201.0         5,260        24,446       8,053.8  cuMemFree_v2        
-     0.0           50,094         13       3,853.4         1,794        14,006       3,416.4  cuStreamDestroy_v2  
-     0.0           37,782         15       2,518.8           661        11,021       3,000.3  cuEventRecord       
-     0.0           33,562          3      11,187.3         7,714        15,279       3,820.2  cuMemcpyHtoDAsync_v2
-     0.0           28,481         13       2,190.8           741         6,973       1,881.2  cuEventSynchronize  
-     0.0           17,078         15       1,138.5           441         5,079       1,237.8  cuEventCreate       
-     0.0           12,283          5       2,456.6         1,373         3,697         860.6  cuEventQuery        
-     0.0            9,367         14         669.1           310         1,643         412.5  cuEventDestroy_v2   
-     0.0            9,238          6       1,539.7           862         3,086         828.9  cuStreamWaitEvent   
+    98.7   17,590,256,698        300  58,634,189.0        15,369   123,534,662  50,420,430.6  cuMemcpyDtoHAsync_v2
+     0.5       97,446,794        500     194,893.6        10,369     1,618,298     183,246.5  cuMemcpyAsync       
+     0.5       86,082,481      2,100      40,991.7           421       261,588      81,252.7  cuStreamSynchronize 
+     0.2       35,558,952      1,000      35,559.0         2,415       214,430      46,779.2  cuMemAlloc_v2       
+     0.0        3,453,144        300      11,510.5         7,113        28,663       3,004.8  cuLaunchKernel      
+     0.0        3,273,022      1,300       2,517.7         1,021        32,010       1,958.4  cuStreamCreate      
+     0.0        2,682,019        500       5,364.0         2,535        12,373       2,415.9  cuMemFree_v2        
+     0.0        2,126,296      1,300       1,635.6           952         7,945         860.4  cuStreamDestroy_v2  
+     0.0        1,874,463        300       6,248.2         4,188        32,540       2,082.8  cuMemcpyHtoDAsync_v2
+     0.0        1,564,698      1,500       1,043.1           370         7,054         842.7  cuEventSynchronize  
+     0.0        1,051,753      1,401         750.7           270        14,397         775.1  cuEventRecord       
+     0.0          836,824        500       1,673.6           822         7,404         765.9  cuEventQuery        
+     0.0          619,956          1     619,956.0       619,956       619,956           0.0  cuModuleLoadDataEx  
+     0.0          584,261      1,401         417.0           200        33,052       1,050.7  cuEventCreate       
+     0.0          467,265        600         778.8           290        28,223       1,288.4  cuStreamWaitEvent   
+     0.0          458,989      1,400         327.8           131         5,200         425.7  cuEventDestroy_v2   
+     0.0          390,278          1     390,278.0       390,278       390,278           0.0  cuModuleUnload      
 
 
 
@@ -37,9 +135,9 @@ CUDA Kernel Statistics:
 
  Time(%)  Total Time (ns)  Instances  Average (ns)   Minimum (ns)  Maximum (ns)  StdDev (ns)                                                  Name                                                
  -------  ---------------  ---------  -------------  ------------  ------------  -----------  ----------------------------------------------------------------------------------------------------
-    69.4      120,541,251          1  120,541,251.0   120,541,251   120,541,251          0.0  Typeinfo name for sycl::_V1::detail::reduction::MainKrn<recip_potential(Particles &, Kvector &, dou…
-    30.6       53,129,933          1   53,129,933.0    53,129,933    53,129,933          0.0  Typeinfo name for sycl::_V1::detail::reduction::MainKrn<real_potential(Particles &, double, double,…
-     0.0            6,176          1        6,176.0         6,176         6,176          0.0  Typeinfo name for sycl::_V1::detail::reduction::AuxKrn<real_potential(Particles &, double, double, …
+    69.9   12,291,755,583        100  122,917,555.8   122,515,237   123,525,899     75,014.9  Typeinfo name for sycl::_V1::detail::reduction::MainKrn<recip_potential(Particles &, Kvector &, dou…
+    30.1    5,303,553,562        100   53,035,535.6    52,887,245    53,387,153    147,402.0  Typeinfo name for sycl::_V1::detail::reduction::MainKrn<real_potential(Particles &, double, double,…
+     0.0          506,560        100        5,065.6         4,640         5,792        225.6  Typeinfo name for sycl::_V1::detail::reduction::AuxKrn<real_potential(Particles &, double, double, …
 
 
 
@@ -47,8 +145,8 @@ CUDA Memory Operation Statistics (by time):
 
  Time(%)  Total Time (ns)  Count  Average (ns)  Minimum (ns)  Maximum (ns)  StdDev (ns)      Operation     
  -------  ---------------  -----  ------------  ------------  ------------  -----------  ------------------
-    98.7          417,220      8      52,152.5         1,440       182,177     73,479.4  [CUDA memcpy HtoD]
-     1.3            5,536      3       1,845.3         1,505         2,079        301.5  [CUDA memcpy DtoH]
+    99.7      144,094,197    800     180,117.7         1,376       980,806    216,190.0  [CUDA memcpy HtoD]
+     0.3          450,035    300       1,500.1         1,439         2,304         89.6  [CUDA memcpy DtoH]
 
 
 
@@ -56,6 +154,6 @@ CUDA Memory Operation Statistics (by size):
 
  Total (MB)  Count  Average (MB)  Minimum (MB)  Maximum (MB)  StdDev (MB)      Operation     
  ----------  -----  ------------  ------------  ------------  -----------  ------------------
-      6.474      8         0.809         0.000         2.400        1.040  [CUDA memcpy HtoD]
-      0.000      3         0.000         0.000         0.000        0.000  [CUDA memcpy DtoH]
+    647.411    800         0.809         0.000         2.400        0.973  [CUDA memcpy HtoD]
+      0.002    300         0.000         0.000         0.000        0.000  [CUDA memcpy DtoH]
 

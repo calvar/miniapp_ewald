@@ -1,5 +1,7 @@
 #Profile with readable output
 nsys nvprof main
+   or
+nsys nvprof --print-gpu-trace main
 
 
 #Profile

@@ -6,7 +6,7 @@
 #include "dev_functions.hpp"
 
 const int BLOCK_WIDTH_R = 512; //Max threads per block
-const int BLOCK_WIDTH_K = 512;  //Max threads per block
+const int BLOCK_WIDTH_K = 128;  //Max threads per block
 const int K_SIM_SIZE = 4;
 
 
@@ -230,10 +230,10 @@ __global__ void recip_coulomb_kernel(double *chrg, double *pos, int N, int kmax,
       
       //Correct for the symmetries used
       if((nx == 0 && ny == 0) || (nx == 0 && nz == 0) || (ny == 0 && nz == 0))
-	U /= 4;
+   	U /= 4;
       else if((nz == 0 && nx != 0 && ny != 0) || (ny == 0 && nz != 0 && nx != 0)
-	      || (nx == 0 && ny != 0 && nz != 0))
-	U /= 2;
+        || (nx == 0 && ny != 0 && nz != 0))
+  	U /= 2;
 
       //pcnt += 1;
     }

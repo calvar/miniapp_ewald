@@ -5,7 +5,7 @@
 
 
 const int TEAM_SIZE_R = 512; //More than 512 in GTX1050ti gives erroneous results
-const int TEAM_SIZE_K = 512;  //More than 512 in GTX1050ti gives erroneous results
+const int TEAM_SIZE_K = 64;  //More than 512 in GTX1050ti gives erroneous results
 
   
 
